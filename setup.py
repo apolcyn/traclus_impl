@@ -8,4 +8,7 @@ setup(name='traclus_impl',
       author_email='alexpolcyn65@gmail.com',
       license='MIT',
       packages=['traclus_impl'],
+      install_requires=[
+          'planar',
+      ],
       zip_safe=False)
