@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='traclus_impl',
-      version='0.2',
+      version='0.3',
       description='First pass implementation of traclus algorithm',
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',
@@ -9,6 +9,6 @@ setup(name='traclus_impl',
       license='MIT',
       packages=['traclus_impl'],
       install_requires=[
-          'planar',
+          'polypaths_planar_override',
       ],
       zip_safe=False)
