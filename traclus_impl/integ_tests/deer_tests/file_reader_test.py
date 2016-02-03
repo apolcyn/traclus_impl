@@ -4,7 +4,7 @@ Created on Jan 19, 2016
 @author: Alex
 '''
 import unittest
-from planar import Point
+from polypaths_planar_override import Point
 from deer_file_reader import read_test_file
 import os
 

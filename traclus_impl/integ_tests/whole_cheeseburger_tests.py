@@ -5,7 +5,7 @@ Created on Jan 13, 2016
 '''
 import unittest
 from tests.unit_base_tests import UnitBaseTests
-from planar import Point
+from polypaths_planar_override import Point
 from coordination import the_whole_enchilada
 import math
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY

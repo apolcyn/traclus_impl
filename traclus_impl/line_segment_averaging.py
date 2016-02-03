@@ -6,7 +6,7 @@ Created on Jan 5, 2016
 
 from representative_trajectory_average_inputs import get_representative_trajectory_average_inputs,\
     DECIMAL_MAX_DIFF_FOR_EQUALITY
-from planar import Point
+from polypaths_planar_override import Point
 from representative_line_finding import get_average_vector, get_rotated_line_segment
 
 def get_representative_line_from_trajectory_line_segments(trajectory_line_segments, min_vertical_lines, min_prev_dist):

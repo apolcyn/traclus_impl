@@ -7,8 +7,8 @@ import unittest
 from representative_trajectory_average_inputs import get_representative_trajectory_average_inputs,\
     get_sorted_line_seg_endpoints, DECIMAL_MAX_DIFF_FOR_EQUALITY
 from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment
-from planar import Point
-from planar.line import LineSegment
+from polypaths_planar_override import Point
+from polypaths_planar_override.line import LineSegment
 import random
 
 class RepresentativeTrajectoryAverageInputsTest(unittest.TestCase):

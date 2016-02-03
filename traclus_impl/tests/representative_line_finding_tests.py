@@ -6,7 +6,7 @@ Created on Jan 6, 2016
 import unittest
 from representative_line_finding import get_average_vector, get_rotated_line_segment
 from unit_base_tests import UnitBaseTests
-from planar import Vec2
+from polypaths_planar_override import Vec2
 import math
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 

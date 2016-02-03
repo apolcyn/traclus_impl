@@ -5,7 +5,7 @@ Created on Jan 9, 2016
 '''
 import unittest
 from tests.unit_base_tests import UnitBaseTests
-from planar import Point
+from polypaths_planar_override import Point
 from partitioning.trajectory_partitioning import call_partition_trajectory
 
 class SimpleLinePartitioningIntegTest(UnitBaseTests):

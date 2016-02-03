@@ -4,8 +4,8 @@ Created on Dec 29, 2015
 @author: Alex
 '''
 
-from planar import Vec2Array
-from planar import LineSegment
+from polypaths_planar_override import Vec2Array
+from polypaths_planar_override import LineSegment
 from argparse import ArgumentError
 import distance_functions
 from distance_functions import perpendicular_distance

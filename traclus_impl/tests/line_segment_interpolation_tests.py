@@ -5,8 +5,8 @@ Created on Jan 5, 2016
 '''
 import unittest
 from line_segment_averaging import interpolate_within_line_segment
-from planar import Point
-from planar import LineSegment
+from polypaths_planar_override import Point
+from polypaths_planar_override import LineSegment
 
 class LineSegmentInterpolationTest(unittest.TestCase):
 

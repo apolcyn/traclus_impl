@@ -6,8 +6,8 @@ Created on Dec 29, 2015
 import unittest 
 import distance_functions
 import math
-from planar import LineSegment
-from planar import Point
+from polypaths_planar_override import LineSegment
+from polypaths_planar_override import Point
 from distance_functions import parrallel_distance, perpendicular_distance,\
     angular_distance, get_total_distance_function
 from partitioning.mutable_float import MutableFloat, MutableNumber

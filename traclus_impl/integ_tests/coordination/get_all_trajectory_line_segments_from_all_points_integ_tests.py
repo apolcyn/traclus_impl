@@ -4,7 +4,7 @@ Created on Jan 14, 2016
 @author: Alex
 '''
 import unittest
-from planar import Point
+from polypaths_planar_override import Point
 
 class GetAllTrajectoryLineSegmentsFromAllPointsIntegTest(unittest.TestCase):
 

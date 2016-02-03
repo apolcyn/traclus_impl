@@ -3,8 +3,8 @@ Created on Dec 29, 2015
 
 @author: Alex
 '''
-from planar import Line
-from planar import Vec2
+from polypaths_planar_override import Line
+from polypaths_planar_override import Vec2
 import math
 
 def get_longer_line(line_a, line_b):

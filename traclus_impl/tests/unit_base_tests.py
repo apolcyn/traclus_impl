@@ -4,8 +4,8 @@ Created on Jan 6, 2016
 @author: Alex
 '''
 import unittest
-from planar import LineSegment
-from planar import Point
+from polypaths_planar_override import LineSegment
+from polypaths_planar_override import Point
 from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 

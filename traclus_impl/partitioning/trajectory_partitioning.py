@@ -3,8 +3,8 @@ Created on Jan 7, 2016
 
 @author: Alex
 '''
-from planar.line import LineSegment
-from planar import Point
+from polypaths_planar_override.line import LineSegment
+from polypaths_planar_override import Point
 from distance_functions import get_total_distance_function,\
     perpendicular_distance, angular_distance, parrallel_distance
 import math

@@ -4,7 +4,7 @@ Created on Dec 30, 2015
 @author: Alex
 '''
 import unittest
-from planar import Point
+from polypaths_planar_override import Point
 from generic_dbscan import ClusterCandidate, ClusterFactory, dbscan
 
 class TestPoint(ClusterCandidate):

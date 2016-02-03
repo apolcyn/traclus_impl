@@ -6,8 +6,8 @@ Created on Dec 31, 2015
 import unittest
 from _ctypes import ArgumentError
 from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment
-from planar import LineSegment
-from planar import Point
+from polypaths_planar_override import LineSegment
+from polypaths_planar_override import Point
 
 class TestTrajectoryLineSegments(unittest.TestCase):
 

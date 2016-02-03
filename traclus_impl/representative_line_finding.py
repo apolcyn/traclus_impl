@@ -3,8 +3,8 @@ Created on Jan 6, 2016
 
 @author: Alex
 '''
-from planar import Vec2
-from planar import LineSegment
+from polypaths_planar_override import Vec2
+from polypaths_planar_override import LineSegment
 
 def get_average_vector(line_segment_list):
     if len(line_segment_list) < 1:
