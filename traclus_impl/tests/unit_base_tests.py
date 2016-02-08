@@ -21,6 +21,12 @@ class UnitBaseTests(unittest.TestCase):
         func = lambda x: [h for h in x]
         self.assertRaises(exception_type, func, iterable)
     
+    def lines_almost_equal(self, a, b):
+        return abs(a.start.x - b.start.x) < DECIMAL_MAX_DIFF_FOR_EQUALITY and \
+            abs(a.start.y - b.start.y) < DECIMAL_MAX_DIFF_FOR_EQUALITY and \
+            abs(a.end.x - b.end.x) < DECIMAL_MAX_DIFF_FOR_EQUALITY and \
+            abs(a.end.y - b.end.y) < DECIMAL_MAX_DIFF_FOR_EQUALITY        
+    
     def verify_lines_almost_equal(self, a, b):
         self.assertAlmostEquals(a.start.x, b.start.x, delta=DECIMAL_MAX_DIFF_FOR_EQUALITY)
         self.assertAlmostEquals(a.start.y, b.start.y, delta=DECIMAL_MAX_DIFF_FOR_EQUALITY)

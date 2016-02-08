@@ -9,6 +9,10 @@ from polypaths_planar_override import Point
 from coordination import the_whole_enchilada
 import math
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+from traclus_impl.generic_dbscan import ClusterFactory
+from traclus_dbscan.traclus_dbscan import TrajectoryClusterFactory,\
+    TrajectoryLineSegment
+from hooks import clusters_hook
 
 class JumboShrimpTest(UnitBaseTests):
     
@@ -204,6 +208,67 @@ class JumboShrimpTest(UnitBaseTests):
                                   min_vertical_lines=1, \
                                   min_prev_dist=10)
         self.verify_point_iterable_almost_equals_list(iterable=res, expected_list=expected)
+        
+    def test_hooks_get_called_with_correct_stuff(self):
+        part_hook_called = [False]
+        clusters_hook_called = [False]
+        def test_partition_hook(points):
+            expected_partitions = iter([self.create_simple_line_seg((0, 0), (4, 0)), \
+                self.create_simple_line_seg((0, 1), (4, 1)), \
+                self.create_simple_line_seg((0, 3), (4, 3))])
+            
+            i = 0
+            for traj in points:
+                exp = expected_partitions.next()
+                self.verify_lines_almost_equal(exp, traj.line_segment)
+                i += 1
+            self.assertRaises(StopIteration, expected_partitions.next)
+            part_hook_called[0] = True
+            
+        def test_clusters_hook(clusters):
+            cluster_one = [self.create_simple_line_seg((0, 0), (4, 0)), \
+                           self.create_simple_line_seg((0, 1), (4, 1))]
+            cluster_two = [self.create_simple_line_seg((0, 3), (4, 3))]
+            expected_clusters = [cluster_one, cluster_two]
+            
+            def line_seg_groups_equal(a, b):
+                for actual in a:
+                    if not any(map(lambda x: self.lines_almost_equal(x, actual), b)):
+                        return False
+                return len(a) == len(b)
+            
+            def cluster_expected(cluster):
+                for exp in expected_clusters:
+                    if line_seg_groups_equal(exp, cluster):
+                        expected_clusters.remove(exp)
+                        return True
+                return False
+        
+            for actual_cluster in clusters:
+                actual_traj_set = map(lambda x: x.line_segment, \
+                                      actual_cluster.get_trajectory_line_segments())
+                self.assertTrue(cluster_expected(actual_traj_set), \
+                                " cluster: " + str(actual_traj_set) + \
+                                " is not expected. here are the expected " + \
+                                " line seg clusters: " + str(expected_clusters))
+            
+            self.assertTrue(len(expected_clusters) == 0, " failed, still " + \
+                            " have this left in expected: " + str(expected_clusters))
+            clusters_hook_called[0] = True             
+
+        points = [[Point(0, 0), Point(2, 0), Point(4, 0)], \
+                  [Point(0, 1), Point(2, 1), Point(4, 1)], \
+                  [Point(0, 3), Point(2, 3), Point(4, 3)]]
+        expected = [[Point(0, 0.5), Point(4, 0.5)], \
+                  [Point(0, 3), Point(4, 3)]]
+        res = the_whole_enchilada(point_iterable_list=points, \
+                                  epsilon=1, min_neighbors=0, min_num_trajectories_in_cluster=1, \
+                                  min_vertical_lines=1, min_prev_dist=1.0, \
+                                  partitioned_points_hook=test_partition_hook, \
+                                  clusters_hook=test_clusters_hook)
+        self.verify_iterable_works_more_than_once(iterable=res, list_ob=expected)
+        self.assertTrue(part_hook_called[0])
+        self.assertTrue(clusters_hook_called[0])
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
