@@ -4,12 +4,10 @@ Created on Jan 7, 2016
 @author: Alex
 '''
 from polypaths_planar_override.line import LineSegment
-from polypaths_planar_override import Point
-from distance_functions import get_total_distance_function,\
-    perpendicular_distance, angular_distance, parrallel_distance
+from traclus_impl.distance_functions import perpendicular_distance, \
+angular_distance
 import math
 from partitioning.mutable_float import MutableFloat
-from generator_initializer import GeneratorInitializer
 
 def call_partition_trajectory(trajectory_point_list):
     if len(trajectory_point_list) < 2:
