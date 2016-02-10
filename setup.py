@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='traclus_impl',
-      version='0.6',
+      version='0.7',
       description='First pass implementation of traclus algorithm',
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',
