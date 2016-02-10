@@ -7,7 +7,7 @@ from polypaths_planar_override.line import LineSegment
 from traclus_impl.distance_functions import perpendicular_distance, \
 angular_distance
 import math
-from partitioning.mutable_float import MutableFloat
+from mutable_float import MutableFloat
 
 def call_partition_trajectory(trajectory_point_list):
     if len(trajectory_point_list) < 2:
