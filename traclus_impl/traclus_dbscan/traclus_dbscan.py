@@ -21,6 +21,19 @@ class TrajectoryLineSegment(ClusterCandidate):
         self.line_segment = line_segment
         self.trajectory_id = trajectory_id
         self.position_in_trajectory = position_in_trajectory
+        self.num_neighbors = -1
+        
+    def get_num_neighbors(self):
+        if self.num_neighbors == -1:
+            raise Exception("haven't counted num neighbors yet")
+        return self.num_neighbors
+        
+    def find_neighbors(self, candidates, epsilon):
+        neighbors = ClusterCandidate.find_neighbors(self, candidates, epsilon)
+        if self.num_neighbors != -1 and self.num_neighbors != len(neighbors):
+            raise Exception("neighbors count should never be changing")
+        self.num_neighbors = len(neighbors)
+        return neighbors
         
     def distance_to_candidate(self, other_candidate):
         if other_candidate == None or other_candidate.line_segment == None or self.line_segment == None:
