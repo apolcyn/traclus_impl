@@ -4,6 +4,7 @@ Created on Feb 11, 2016
 @author: Alex
 '''
 import unit_base_tests
+import unittest
 from parameter_estimation import find_entropy
 
 class EntropyCalculationTest(unit_base_tests.UnitBaseTests):
