@@ -11,5 +11,6 @@ setup(name='traclus_impl',
        'traclus_impl.traclus_dbscan'], 
       install_requires=[
           'polypaths_planar_override',
+	  'simanneal',
       ],
       zip_safe=False)

@@ -1,0 +1,42 @@
+'''
+Created on Feb 14, 2016
+
+@author: Alex
+'''
+import unittest
+from parameter_estimation import TraclusSimulatedAnnealingState
+from parameter_estimation import TraclusSimulatedAnnealer
+from polypaths_planar_override import Point
+
+class SimulatedAnnealingTest(unittest.TestCase):
+
+    def test_simulated_annealing_doesnt_blow_up(self):
+        input_trajectories = [[Point(0, 0), Point(0, 1)], \
+                              [Point(2, 0), Point(2, 1)], \
+                              [Point(3, 0), Point(3, 1)]]
+        initial_state = TraclusSimulatedAnnealingState(input_trajectories=input_trajectories, \
+                                                       epsilon=0.5)
+        traclus_sim_anneal = TraclusSimulatedAnnealer(initial_state=initial_state, \
+                                                      max_epsilon_step_change=0.1)
+        traclus_sim_anneal.updates = 0
+        traclus_sim_anneal.steps = 5000
+        best_state, best_energy = traclus_sim_anneal.anneal()
+        self.assertAlmostEqual(best_state.get_epsilon(), 1.0, delta=0.05)
+        
+    def test_simulated_annealing_finds_good_solution_quickly(self):
+        input_trajectories = [[Point(0, 0), Point(0, 1)], \
+                              [Point(2, 0), Point(2, 1)], \
+                              [Point(3, 0), Point(3, 1)]]
+        initial_state = TraclusSimulatedAnnealingState(input_trajectories=input_trajectories, \
+                                                       epsilon=0.7)
+        traclus_sim_anneal = TraclusSimulatedAnnealer(initial_state=initial_state, \
+                                                      max_epsilon_step_change=0.3)
+        traclus_sim_anneal.updates = 0
+        traclus_sim_anneal.steps = 50
+        best_state, best_energy = traclus_sim_anneal.anneal()
+        self.assertAlmostEqual(best_state.get_epsilon(), 1.0, delta=0.1)
+        
+
+if __name__ == "__main__":
+    #import sys;sys.argv = ['', 'Test.testName']
+    unittest.main()
