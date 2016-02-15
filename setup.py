@@ -11,8 +11,8 @@ for readability."""
 
 
 setup(name='traclus_impl',
-      version='0.8',
-      description='First pass implementation of traclus algorithm',
+      version='0.8.1',
+      description=LONG_DESCRIPTION,
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',
       author_email='alexpolcyn65@gmail.com',
