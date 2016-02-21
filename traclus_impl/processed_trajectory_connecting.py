@@ -9,6 +9,18 @@ import collections
 from heapq import heappush
 from heapq import heappop
 
+class FilteredTrajectory:
+    def __init__(self, trajectory, id):
+        self.id = id
+        self.trajectory = trajectory
+        
+class FilteredTrajectoryConnection:
+    def __init__(self, start_pt, end_pt, start_traj_id, end_traj_id):
+        self.start_pt = start_pt
+        self.end_pt = end_pt
+        self.start_traj_id = start_traj_id
+        self.end_traj_id = end_traj_id        
+
 class FilteredPointGraphNode:
     def __init__(self, point, index, original_trajectory_id):
         self.point = point
@@ -19,10 +31,13 @@ class FilteredPointGraphNode:
         
     def add_neighbor(self, other_node):
         self.neighbor_indices.add(other_node.index)
-        other_node.add_neighbor(self)
+        other_node.neighbor_indices.add(self.index)
         
     def get_neighbor_indices(self):
         return self.neighbor_indices
+    
+    def get_original_trajectory_id(self):
+        return self.original_trajectory_id
 
 def build_point_graph(filtered_trajectories):
     cur_pt_index = 0
@@ -52,20 +67,24 @@ def mark_all_in_same_component(pt_node, component_id, pt_graph, \
     node_queue = collections.deque()
     node_queue.append(pt_node)
     
-    while node_queue.count() > 0:
-        temp_node = node_queue.popLeft()
+    while len(node_queue) > 0:
+        temp_node = node_queue.popleft()
         
         def queue_adder_func(neighbor_index):
-            if pt_graph[neighbor_index].graph_component_id != None:
+            if pt_graph[neighbor_index].graph_component_id == None:
                 pt_graph[neighbor_index].graph_component_id = component_id
                 node_queue.append(pt_graph[neighbor_index])
-        
+            elif pt_graph[neighbor_index].graph_component_id != component_id:
+                raise Exception("graph edges should not be directional")
+
         for neighbor_index in temp_node.get_neighbor_indices():
             queue_adder_func(neighbor_index)
-        for neighbor_index in find_other_neighbors_func(pt_node, pt_graph):
+        for neighbor_index in find_other_neighbors_func(pt_node=temp_node, \
+                                                        pt_graph=pt_graph):
             queue_adder_func(neighbor_index)
             
-def compute_shortest_path(start_node_index, end_node_index, pt_graph, distance_func):
+def compute_shortest_path(start_node_index, end_node_index, pt_graph, \
+                          pt_pt_distance_func):
     priority_queue = []
     distances_from_start = [0.0].extend([None] * (len(pt_graph) - 1))
     back_edges = [None] * len(pt_graph)
@@ -78,7 +97,7 @@ def compute_shortest_path(start_node_index, end_node_index, pt_graph, distance_f
             end_node_reached = True
             break
         for neighbor_index in pt_graph[temp_node_index].get_neighbor_indices():
-            temp_dist = distance_func(temp_node_index, neighbor_index, pt_graph) + \
+            temp_dist = pt_pt_distance_func(temp_node_index, neighbor_index, pt_graph) + \
             distances_from_start[temp_node_index]
             if distances_from_start[neighbor_index] == None or \
             temp_dist < distances_from_start[neighbor_index]:
@@ -127,13 +146,15 @@ def find_shortest_connection(start_pt, end_pt, pt_graph, max_dist_to_existing_pt
                                                          pt_graph, \
                                                          pt_pt_distance_func, \
                                                          max_dist_to_existing_pt)
+    if possible_connections == None:
+        return None
     
     shortest_connection = None
     for connection in possible_connections:
         temp_path, temp_dist = \
         compute_shortest_path(start_node_index=connection[0], \
                               end_node_index=connection[1], \
-                              pt_graph, pt_pt_distance_func)
+                              pt_graph=pt_graph, pt_pt_distance_func=pt_pt_distance_func)
         if shortest_connection == None or temp_dist < shortest_connection[1]:
             shortest_connection = (temp_path, temp_dist)
     
@@ -149,18 +170,6 @@ def find_nearest_points_to_all_trajectory_endpoints(filtered_trajectories):
     
     return nearest_point_line_segments
 
-class FilteredTrajectory:
-    def __init__(self, trajectory, id):
-        self.id = id
-        self.trajectory = trajectory
-        
-class FilteredTrajectoryConnection:
-    def __init__(self, start_pt, end_pt, start_traj_id, end_traj_id):
-        self.start_pt = start_pt
-        self.end_pt = end_pt
-        self.start_traj_id = start_traj_id
-        self.end_traj_id = end_traj_id        
-        
 def get_nearest_point_line_segs(traj, all_trajectories):
     def get_all_points_of_trajectory(trajectory):
         point_list = map(lambda x: x.start, \
