@@ -86,9 +86,10 @@ def mark_all_in_same_component(pt_node, component_id, pt_graph, \
 def compute_shortest_path(start_node_index, end_node_index, pt_graph, \
                           pt_pt_distance_func):
     priority_queue = []
-    distances_from_start = [0.0].extend([None] * (len(pt_graph) - 1))
+    distances_from_start = [0.0]
+    distances_from_start.extend([None] * (len(pt_graph) - 1))
     back_edges = [None] * len(pt_graph)
-    heappush(priority_queue(0.0, start_node_index))
+    heappush(priority_queue, (0.0, start_node_index))
     
     end_node_reached = False
     while len(priority_queue) > 0:
@@ -103,17 +104,19 @@ def compute_shortest_path(start_node_index, end_node_index, pt_graph, \
             temp_dist < distances_from_start[neighbor_index]:
                 distances_from_start[neighbor_index] = temp_dist
                 heappush(priority_queue, (temp_dist, neighbor_index))
+                back_edges[neighbor_index] = temp_node_index
                 
     if not end_node_reached:     
-        return None
+        return None, None
         
     cur_index = end_node_index
     shortest_path = [end_node_index]
     while cur_index != start_node_index:
         cur_index = back_edges[cur_index]
         shortest_path.append(cur_index)
+    shortest_path.reverse()
     
-    return shortest_path.reverse(), distances_from_start[end_node_index]
+    return shortest_path, distances_from_start[end_node_index]
 
 def find_nearest_points_to_point(point, pt_graph, distance_func, max_dist):
     nearby_points = []
