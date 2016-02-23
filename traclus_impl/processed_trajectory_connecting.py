@@ -30,8 +30,9 @@ class FilteredPointGraphNode:
         self.graph_component_id = None
         
     def add_neighbor(self, other_node):
-        self.neighbor_indices.add(other_node.index)
-        other_node.neighbor_indices.add(self.index)
+        if other_node != self:
+            self.neighbor_indices.add(other_node.index)
+            other_node.neighbor_indices.add(self.index)
         
     def get_neighbor_indices(self):
         return self.neighbor_indices
@@ -39,7 +40,7 @@ class FilteredPointGraphNode:
     def get_original_trajectory_id(self):
         return self.original_trajectory_id
 
-def build_point_graph(filtered_trajectories):
+def build_point_graph(filtered_trajectories, add_other_neigbors_func=None):
     cur_pt_index = 0
     pt_graph = []
     
@@ -49,8 +50,10 @@ def build_point_graph(filtered_trajectories):
             pt_graph.append(FilteredPointGraphNode(pt, cur_pt_index, traj.id))
             if prev_pt_graph_node != None:
                 pt_graph[cur_pt_index].add_neighbor(prev_pt_graph_node)
+            if add_other_neigbors_func != None:
+                add_other_neigbors_func(node_index=cur_pt_index, pt_graph=pt_graph)
             prev_pt_graph_node = pt_graph[cur_pt_index]
-            cur_pt_index += 1
+            cur_pt_index += 1                
             
     return pt_graph
 
@@ -83,11 +86,18 @@ def mark_all_in_same_component(pt_node, component_id, pt_graph, \
                                                         pt_graph=pt_graph):
             queue_adder_func(neighbor_index)
             
+def get_find_other_nearby_neighbors_func(max_distance):
+    def _func(node_index, pt_graph):
+        for temp_node in pt_graph:
+            if temp_node.point.distance_to(pt_graph[node_index].point) <= max_distance:
+                pt_graph[node_index].add_neighbor(temp_node)
+    return _func       
+            
 def compute_shortest_path(start_node_index, end_node_index, pt_graph, \
                           pt_pt_distance_func):
     priority_queue = []
-    distances_from_start = [0.0]
-    distances_from_start.extend([None] * (len(pt_graph) - 1))
+    distances_from_start = [None] * len(pt_graph)
+    distances_from_start[start_node_index] = 0.0
     back_edges = [None] * len(pt_graph)
     heappush(priority_queue, (0.0, start_node_index))
     
@@ -143,12 +153,18 @@ def find_all_possible_connections(start_pt, end_pt, \
     return possible_connections
 
 def find_shortest_connection(start_pt, end_pt, pt_graph, max_dist_to_existing_pt):
-    def pt_pt_distance_func(a, b):
-        return math.pow(a.x - b.x, 2) + math.pow(a.y - b.y, 2)
-    possible_connections = find_all_possible_connections(start_pt, end_pt, \
-                                                         pt_graph, \
-                                                         pt_pt_distance_func, \
-                                                         max_dist_to_existing_pt)
+    def pt_pt_distance_func_for_finding_nearby_points(pt_a, pt_b):
+        return pt_a.distance_to(pt_b)
+    
+    def pt_pt_distance_func_for_shortest_path_finding(a_index, b_index, pt_graph):
+        pt_a = pt_graph[a_index].point
+        pt_b = pt_graph[b_index].point
+        return math.pow(pt_a.x - pt_b.x, 2) + math.pow(pt_a.y - pt_b.y, 2)
+    
+    possible_connections = find_all_possible_connections(start_pt=start_pt, end_pt=end_pt, \
+                                                         pt_graph=pt_graph, \
+                                                         distance_func=pt_pt_distance_func_for_finding_nearby_points, 
+                                                         max_dist_to_existing_pt=max_dist_to_existing_pt)
     if possible_connections == None:
         return None
     
@@ -157,7 +173,8 @@ def find_shortest_connection(start_pt, end_pt, pt_graph, max_dist_to_existing_pt
         temp_path, temp_dist = \
         compute_shortest_path(start_node_index=connection[0], \
                               end_node_index=connection[1], \
-                              pt_graph=pt_graph, pt_pt_distance_func=pt_pt_distance_func)
+                              pt_graph=pt_graph, \
+                              pt_pt_distance_func=pt_pt_distance_func_for_shortest_path_finding)
         if shortest_connection == None or temp_dist < shortest_connection[1]:
             shortest_connection = (temp_path, temp_dist)
     
