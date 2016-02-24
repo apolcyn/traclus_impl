@@ -11,7 +11,7 @@ for readability."""
 
 
 setup(name='traclus_impl',
-      version='0.8.1',
+      version='0.8.3',
       description=LONG_DESCRIPTION,
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',

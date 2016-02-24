@@ -165,8 +165,8 @@ def find_shortest_connection(start_pt, end_pt, pt_graph, max_dist_to_existing_pt
                                                          pt_graph=pt_graph, \
                                                          distance_func=pt_pt_distance_func_for_finding_nearby_points, 
                                                          max_dist_to_existing_pt=max_dist_to_existing_pt)
-    if possible_connections == None:
-        return None
+    if len(possible_connections) == 0:
+        return None, None
     
     shortest_connection = None
     for connection in possible_connections:

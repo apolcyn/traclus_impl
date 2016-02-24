@@ -98,6 +98,30 @@ class ComputeShortestConnectionTest(UnitBaseTests):
             self.assertEquals(exp_pt.y, act_pt.y)
             
         self.assertEquals(expected_shortest_distance, actual_shortest_distance)
+        
+    def test_returns_none_none_when_no_possible_connections(self):            
+        max_distance_for_neighbors_in_different_trajectories = 1.0
+        other_neighbors_func = get_find_other_nearby_neighbors_func(max_distance_for_neighbors_in_different_trajectories)
+
+        pt_graph = build_point_graph([], add_other_neigbors_func=other_neighbors_func)
+        
+        def dummy_find_other_neighbors_func(pt_node, pt_graph):
+            return []
+        
+        compute_graph_component_ids(pt_graph=pt_graph, \
+                                    find_other_neighbors_func=dummy_find_other_neighbors_func)
+        
+        start_pt = Point(1.5, 2.5)
+        end_pt = Point(4.5, 2.5)
+        max_dist_to_existing_pt = 0.9
+        
+        actual_shortest_connection, actual_shortest_distance = find_shortest_connection(start_pt=start_pt, \
+                                                                          end_pt=end_pt, \
+                                                                          pt_graph=pt_graph, \
+                                                                          max_dist_to_existing_pt=max_dist_to_existing_pt)
+        
+        self.assertEquals(actual_shortest_connection, None)    
+        self.assertEquals(actual_shortest_distance, None)        
 
 
 if __name__ == "__main__":
