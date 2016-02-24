@@ -83,7 +83,10 @@ class ComputeShortestConnectionTest(UnitBaseTests):
                                         Point(3, 4), \
                                         Point(4, 4), \
                                         Point(4, 3)]
-        expected_shortest_distance = 4.0 + math.sqrt(2.0)
+        
+        # Note that the shortest path distance and calculation ignores
+        # the initial distance to a point on the map
+        expected_shortest_distance = 4.0
         
         self.assertEquals(len(expected_shortest_connection), len(actual_shortest_connection))
         exp_iter = iter(expected_shortest_connection)
