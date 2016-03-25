@@ -14,7 +14,7 @@ from argparse import ArgumentError
 class TrajectoryClusterTests(UnitBaseTests):
 
     def build_test_object(self, line_segments, expected_count, num_trajectories, expected_error = False):
-        return {'line_segments': line_segments, 'num_trajectories': num_trajectories, \
+        return {'geometry': line_segments, 'num_trajectories': num_trajectories, \
                 'expected_count': expected_count }
         
     class Item:
@@ -51,7 +51,7 @@ class TrajectoryClusterTests(UnitBaseTests):
 
     def test_trajectory_counting(self):
         for test_ob in self.test_cases:
-            cluster = self.create_cluster(test_ob['line_segments'], test_ob['num_trajectories'])
+            cluster = self.create_cluster(test_ob['geometry'], test_ob['num_trajectories'])
             self.assertEqual(test_ob['expected_count'], cluster.num_trajectories_contained(), \
                             " found " + str(cluster.num_trajectories_contained()) + " for " + str(test_ob))
                                 
