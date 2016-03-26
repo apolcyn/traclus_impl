@@ -9,7 +9,7 @@ from line_segment_averaging import number_average,\
 from linked_list import LinkedList
 from tests import unit_base_tests
 from line_segment_averaging import get_mean_vertical_coordinate_in_line_segments
-from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment,\
+from traclus_dbscan import TrajectoryLineSegment,\
     TrajectoryLineSegmentFactory
 
 def simple_func(num):

@@ -5,7 +5,7 @@ Created on Feb 10, 2016
 '''
 import unittest
 from generic_dbscan import ClusterCandidate
-from partitioning.mutable_float import MutableFloat
+from mutable_float import MutableFloat
 
 class Test(unittest.TestCase):
     

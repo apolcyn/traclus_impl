@@ -6,7 +6,7 @@ Created on Jan 1, 2016
 import unittest
 from representative_trajectory_average_inputs import get_representative_trajectory_average_inputs,\
     get_sorted_line_seg_endpoints, DECIMAL_MAX_DIFF_FOR_EQUALITY
-from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment
+from traclus_dbscan import TrajectoryLineSegment
 from geometry import Point, LineSegment
 import random
 

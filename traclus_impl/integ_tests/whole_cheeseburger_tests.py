@@ -10,7 +10,7 @@ from coordination import the_whole_enchilada
 import math
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 from generic_dbscan import ClusterFactory
-from traclus_dbscan.traclus_dbscan import TrajectoryClusterFactory,\
+from traclus_dbscan import TrajectoryClusterFactory,\
     TrajectoryLineSegment
 from hooks import clusters_hook
 

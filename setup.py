@@ -11,15 +11,13 @@ for readability."""
 
 
 setup(name='traclus_impl',
-      version='0.8.4',
+      version='0.8.5',
       description=LONG_DESCRIPTION,
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',
       author_email='alexpolcyn65@gmail.com',
       license='MIT',
       packages=['traclus_impl', \
-      'traclus_impl.partitioning', \
-      'traclus_impl.traclus_dbscan', \
       'traclus_impl.tests', \
       'traclus_impl.tests.clustering', \
       'traclus_impl.tests.coordination', \

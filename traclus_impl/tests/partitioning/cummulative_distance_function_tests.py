@@ -4,8 +4,8 @@ Created on Jan 10, 2016
 @author: Alex
 '''
 import unittest
-from partitioning.mutable_float import MutableNumber
-from partitioning.trajectory_partitioning import cummulative_distance_function_getter
+from mutable_float import MutableNumber
+from trajectory_partitioning import cummulative_distance_function_getter
 from tests.unit_base_tests import UnitBaseTests
 
 class CummulativeDistanceFunctionTest(UnitBaseTests):

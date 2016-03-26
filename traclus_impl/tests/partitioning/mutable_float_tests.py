@@ -4,7 +4,7 @@ Created on Jan 8, 2016
 @author: Alex
 '''
 import unittest
-from partitioning.mutable_float import MutableFloat
+from mutable_float import MutableFloat
 
 class MutableFloatTest(unittest.TestCase):
 

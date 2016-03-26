@@ -5,7 +5,7 @@ Created on Jan 9, 2016
 '''
 import unittest
 from tests.unit_base_tests import UnitBaseTests
-from partitioning.trajectory_partitioning import get_number_list_reducer_that_returns_each_midway_val
+from trajectory_partitioning import get_number_list_reducer_that_returns_each_midway_val
 
 class ReducerThatReturnsMidwayValsTests(UnitBaseTests):
 

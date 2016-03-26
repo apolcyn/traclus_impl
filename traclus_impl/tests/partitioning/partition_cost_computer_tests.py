@@ -5,9 +5,9 @@ Created on Jan 7, 2016
 '''
 import unittest
 from tests.unit_base_tests import UnitBaseTests
-from partitioning.trajectory_partitioning import partition_cost_computer
-from partitioning.trajectory_partitioning import no_partition_cost_computer
-from partitioning.mutable_float import MutableFloat, MutableNumber
+from trajectory_partitioning import partition_cost_computer
+from trajectory_partitioning import no_partition_cost_computer
+from mutable_float import MutableFloat, MutableNumber
 
 class PartitionCostComputerTest(unittest.TestCase):
     

@@ -5,7 +5,7 @@ Created on Jan 9, 2016
 '''
 import unittest
 from tests.unit_base_tests import UnitBaseTests
-from partitioning.trajectory_partitioning import part_cost_computer_adapter, no_part_cost_computer_adapter
+from trajectory_partitioning import part_cost_computer_adapter, no_part_cost_computer_adapter
 
 class Test(UnitBaseTests):
     

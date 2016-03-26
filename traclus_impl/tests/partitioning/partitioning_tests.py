@@ -4,9 +4,9 @@ Created on Jan 8, 2016
 @author: Alex
 '''
 import unittest
-from partitioning.trajectory_partitioning import partition_trajectory
+from trajectory_partitioning import partition_trajectory
 from tests.unit_base_tests import UnitBaseTests
-from partitioning.mutable_float import MutableNumber
+from mutable_float import MutableNumber
 
 class PartitioningTest(UnitBaseTests):
     

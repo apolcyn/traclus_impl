@@ -4,7 +4,7 @@ Created on Jan 9, 2016
 @author: Alex
 '''
 import unittest
-from partitioning.trajectory_partitioning import get_partition_from_index_creator
+from trajectory_partitioning import get_partition_from_index_creator
 
 
 class GetPartitionFromIndexCreatorTest(unittest.TestCase):

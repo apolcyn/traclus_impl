@@ -6,7 +6,7 @@ Created on Jan 10, 2016
 import unittest
 from coordination import get_trajectory_line_segments_from_points_iterable
 from tests.unit_base_tests import UnitBaseTests
-from partitioning.mutable_float import MutableNumber
+from mutable_float import MutableNumber
 
 class GetTrajectoryLineSegmentsFromPointsTest(UnitBaseTests):
 

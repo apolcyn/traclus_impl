@@ -9,7 +9,7 @@ import math
 from geometry import LineSegment, Point
 from distance_functions import parrallel_distance, perpendicular_distance,\
     angular_distance, get_total_distance_function
-from partitioning.mutable_float import MutableFloat, MutableNumber
+from mutable_float import MutableFloat, MutableNumber
         
 class DistanceFunctionTest(unittest.TestCase):
     

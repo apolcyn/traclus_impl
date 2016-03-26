@@ -5,7 +5,7 @@ Created on Dec 31, 2015
 '''
 import unittest
 from _ctypes import ArgumentError
-from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment
+from traclus_dbscan import TrajectoryLineSegment
 from geometry import Point, LineSegment
 import unit_base_tests
 from test.test__locale import candidate_locales

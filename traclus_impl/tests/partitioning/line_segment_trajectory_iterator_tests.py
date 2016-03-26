@@ -4,8 +4,8 @@ Created on Jan 7, 2016
 @author: Alex
 '''
 import unittest
-from partitioning.trajectory_partitioning import get_trajectory_line_segment_iterator
-from partitioning.trajectory_partitioning import get_line_segment_from_points
+from trajectory_partitioning import get_trajectory_line_segment_iterator
+from trajectory_partitioning import get_line_segment_from_points
 from tests import unit_base_tests
 
 class LineSegmentTrajectoryIteratorTest(unit_base_tests.UnitBaseTests):

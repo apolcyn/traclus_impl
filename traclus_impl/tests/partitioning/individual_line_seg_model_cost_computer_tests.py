@@ -5,7 +5,7 @@ Created on Jan 9, 2016
 '''
 import unittest
 from tests.unit_base_tests import UnitBaseTests
-from partitioning.trajectory_partitioning import individual_line_seg_model_cost_computer
+from trajectory_partitioning import individual_line_seg_model_cost_computer
 import math
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 

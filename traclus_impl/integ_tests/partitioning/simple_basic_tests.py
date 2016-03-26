@@ -6,7 +6,7 @@ Created on Jan 9, 2016
 import unittest
 from tests.unit_base_tests import UnitBaseTests
 from geometry import Point
-from partitioning.trajectory_partitioning import call_partition_trajectory
+from trajectory_partitioning import call_partition_trajectory
 
 class SimpleLinePartitioningIntegTest(UnitBaseTests):
 

@@ -3,10 +3,10 @@ Created on Jan 10, 2016
 
 @author: Alex
 '''
-from partitioning.trajectory_partitioning import get_line_segment_from_points,\
+from trajectory_partitioning import get_line_segment_from_points,\
     call_partition_trajectory
 from generic_dbscan import dbscan
-from traclus_dbscan.traclus_dbscan import TrajectoryLineSegmentFactory,\
+from traclus_dbscan import TrajectoryLineSegmentFactory,\
     TrajectoryClusterFactory
 from line_segment_averaging import get_representative_line_from_trajectory_line_segments
 import hooks

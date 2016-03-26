@@ -7,7 +7,7 @@ import math
 from simanneal import Annealer
 import copy
 import random
-from partitioning.mutable_float import MutableFloat
+from mutable_float import MutableFloat
 from coordination import the_whole_enchilada
 
 def find_entropy(all_line_segs):
