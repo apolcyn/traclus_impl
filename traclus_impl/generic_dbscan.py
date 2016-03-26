@@ -26,13 +26,17 @@ class ClusterCandidate:
     def distance_to_candidate(self, other_candidate):
         raise NotImplementedError()
     
-    def find_neighbors(self, candidates, epsilon):
+class ClusterCandidateIndex:
+    def __init__(self, candidates):
+        self.candidates = candidates
+        
+    def find_neighbors_of(self, cluster_candidate, epsilon):
         neighbors = []
         
-        for item in candidates:
-            if item != self and self.distance_to_candidate(item) <= epsilon:
-                neighbors.append(item)
-                
+        for item in self.candidates:
+            if item != cluster_candidate and \
+            cluster_candidate.distance_to_candidate(item) <= epsilon:
+                neighbors.append(item)          
         return neighbors
     
 class Cluster:
@@ -53,13 +57,13 @@ class ClusterFactory():
     def new_cluster(self):
         return Cluster()
         
-def dbscan(cluster_candidates, epsilon, min_neighbors, cluster_factory):
+def dbscan(cluster_candidates_index, epsilon, min_neighbors, cluster_factory):
     clusters = []
     item_queue = collections.deque()
     
-    for item in cluster_candidates:
+    for item in cluster_candidates_index.candidates:
         if not item.is_classified():  
-            neighbors = item.find_neighbors(cluster_candidates, epsilon)
+            neighbors = cluster_candidates_index.find_neighbors_of(item, epsilon)
             if len(neighbors) >= min_neighbors:
                 cur_cluster = cluster_factory.new_cluster()
                 cur_cluster.add_member(item)
@@ -71,17 +75,17 @@ def dbscan(cluster_candidates, epsilon, min_neighbors, cluster_factory):
                     item_queue.append(other_item)
                     
                 expand_cluster(item_queue, cur_cluster, epsilon, \
-                               min_neighbors, cluster_candidates)
+                               min_neighbors, cluster_candidates_index)
                 clusters.append(cur_cluster)
             else:
                 item.set_as_noise()
                 
     return clusters
                 
-def expand_cluster(item_queue, cluster, epsilon, min_neighbors, cluster_candidates):
+def expand_cluster(item_queue, cluster, epsilon, min_neighbors, cluster_candidates_index):
     while len(item_queue) > 0:
         item = item_queue.popleft()
-        neighbors = item.find_neighbors(cluster_candidates, epsilon)
+        neighbors = cluster_candidates_index.find_neighbors_of(item, epsilon)
         if len(neighbors) >= min_neighbors:
             for other_item in neighbors:
                 if not other_item.is_classified():

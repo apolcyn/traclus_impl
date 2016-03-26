@@ -3,7 +3,7 @@ Created on Dec 31, 2015
 
 @author: Alex
 '''
-from generic_dbscan import Cluster, ClusterCandidate, ClusterFactory
+from generic_dbscan import Cluster, ClusterCandidate, ClusterFactory, ClusterCandidateIndex
 from distance_functions import perpendicular_distance, angular_distance, parrallel_distance
 
 class TrajectoryLineSegmentFactory():
@@ -27,13 +27,11 @@ class TrajectoryLineSegment(ClusterCandidate):
         if self.num_neighbors == -1:
             raise Exception("haven't counted num neighbors yet")
         return self.num_neighbors
-        
-    def find_neighbors(self, candidates, epsilon):
-        neighbors = ClusterCandidate.find_neighbors(self, candidates, epsilon)
-        if self.num_neighbors != -1 and self.num_neighbors != len(neighbors):
+    
+    def set_num_neighbors(self, num_neighbors):
+        if self.num_neighbors != -1 and self.num_neighbors != num_neighbors:
             raise Exception("neighbors count should never be changing")
-        self.num_neighbors = len(neighbors)
-        return neighbors
+        self.num_neighbors = num_neighbors
         
     def distance_to_candidate(self, other_candidate):
         if other_candidate == None or other_candidate.line_segment == None or self.line_segment == None:
@@ -41,6 +39,15 @@ class TrajectoryLineSegment(ClusterCandidate):
         return perpendicular_distance(self.line_segment, other_candidate.line_segment) + \
             angular_distance(self.line_segment, other_candidate.line_segment) + \
             parrallel_distance(self.line_segment, other_candidate.line_segment)
+            
+class TrajectoryLineSegmentCandidateIndex(ClusterCandidateIndex):
+    def __init__(self, candidates):
+        ClusterCandidateIndex.__init__(self, candidates)
+        
+    def find_neighbors_of(self, cluster_candidate, epsilon):
+        neighbors = ClusterCandidateIndex.find_neighbors_of(self, cluster_candidate, epsilon)
+        cluster_candidate.set_num_neighbors(len(neighbors))
+        return neighbors
 
 class TrajectoryCluster(Cluster):
     def __init__(self):

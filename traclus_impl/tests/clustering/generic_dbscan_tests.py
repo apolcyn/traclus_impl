@@ -5,7 +5,7 @@ Created on Dec 30, 2015
 '''
 import unittest
 from geometry import Point
-from generic_dbscan import ClusterCandidate, ClusterFactory, dbscan
+from generic_dbscan import ClusterCandidate, ClusterFactory, dbscan, ClusterCandidateIndex
 
 class TestPoint(ClusterCandidate):
     def __init__(self, x, y):
@@ -13,7 +13,7 @@ class TestPoint(ClusterCandidate):
         self.point = Point(x, y)
         
     def distance_to_candidate(self, other_candidate):
-        return self.point.distance_to(other_candidate.point)        
+        return self.point.distance_to(other_candidate.point)       
 
 class DbScanTest(unittest.TestCase):
     
@@ -28,7 +28,7 @@ class DbScanTest(unittest.TestCase):
             else:
                 expected_noise.append(test_points[i])
 
-        return {'test_points': test_points, 'expected_clusters': \
+        return {'test_index': ClusterCandidateIndex(test_points), 'expected_clusters': \
                 expected_clusters, 'expected_noise': expected_noise, \
                 'epsilon': epsilon, 'min_neighbors': min_neighbors}
 
@@ -100,13 +100,13 @@ class DbScanTest(unittest.TestCase):
     def test_dbscan(self):
         cluster_factory = ClusterFactory()
         for test_ob in self.test_cases:
-            clusters = dbscan(test_ob['test_points'], test_ob['epsilon'], \
+            clusters = dbscan(test_ob['test_index'], test_ob['epsilon'], \
                    test_ob['min_neighbors'], cluster_factory)
             for expected in test_ob['expected_clusters']:
                 self.assertTrue(self.find_single_matching_cluster(expected, clusters), \
                                 "couldn't find matching cluster in " + str(test_ob) + \
                                 " in clusters: " + str(clusters))
-            for point in test_ob['test_points']:
+            for point in test_ob['test_index'].candidates:
                 self.assertTrue(point.is_classified())
             for point in test_ob['expected_noise']:
                 self.assertTrue(point.is_noise())

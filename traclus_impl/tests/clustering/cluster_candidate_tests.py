@@ -4,7 +4,7 @@ Created on Feb 10, 2016
 @author: Alex
 '''
 import unittest
-from generic_dbscan import ClusterCandidate
+from generic_dbscan import ClusterCandidate, ClusterCandidateIndex
 from mutable_float import MutableFloat
 
 class Test(unittest.TestCase):
@@ -21,8 +21,9 @@ class Test(unittest.TestCase):
             return 0
        
         candidate = ClusterCandidate()
+        index = ClusterCandidateIndex([1, 2, 3, 4, 5])
         candidate.distance_to_candidate = mock_dist_to_other_candidate_func
-        candidate.find_neighbors([1, 2, 3, 4, 5], epsilon=0)
+        index.find_neighbors_of(cluster_candidate=candidate, epsilon=0)
         self.assertEquals(counter.get_val(), 5)        
 
 
