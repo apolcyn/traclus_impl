@@ -44,7 +44,8 @@ class GeometryTest(unittest.TestCase):
         def run_test_case(point, start, end, expected):
             line_seg = LineSegment.from_tuples(start, end)
             point = Point(point[0], point[1])
-            self.assertEquals(expected, point.distance_to_projection_on(line_seg))
+            self.assertAlmostEquals(expected, point.distance_to_projection_on(line_seg), \
+                                    delta=DECIMAL_MAX_DIFF_FOR_EQUALITY)
             
         run_test_case((3.5, 4.5), (3, 3), (5, 5), math.sqrt(2.0) / 2.0)
         run_test_case((4.5, 3.5), (3, 3), (5, 5), math.sqrt(2.0) / 2.0)

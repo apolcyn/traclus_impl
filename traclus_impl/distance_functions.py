@@ -51,11 +51,10 @@ def parrallel_distance(line_a, line_b):
     def __func(shorter_line_pt, longer_line_pt):
         return shorter_line_pt.distance_from_point_to_projection_on_line_seg(longer_line_pt, \
                                                                              longer_line)
-    return min([__func(shorter_line.start, longer_line.start), \
-                 __func(shorter_line.start, longer_line.end), \
-                 __func(shorter_line.end, longer_line.start), \
-                 __func(shorter_line.end, longer_line.end)])
-    
+    return min([longer_line.dist_from_start_to_projection_of(shorter_line.start), \
+               longer_line.dist_from_start_to_projection_of(shorter_line.end), \
+               longer_line.dist_from_end_to_projection_of(shorter_line.start), \
+               longer_line.dist_from_end_to_projection_of(shorter_line.end)])
     
 def dist_to_projection_point(line, proj):
     return min(proj.distance_to(line.start), proj.distance_to(line.end))

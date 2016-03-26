@@ -62,17 +62,12 @@ class Point(Vec2):
         diff_y = other_point.y - self.y
         return math.sqrt(math.pow(diff_x, 2) + math.pow(diff_y, 2))
     
-    def distance_from_point_to_projection_on_line_seg(self, point, line_segment):
-        dot_product = (self.x - line_segment.start.x) * line_segment.unit_vector.x + \
-        (self.y - line_segment.start.y) * line_segment.unit_vector.y
-        
-        proj_x = dot_product * line_segment.unit_vector.x + line_segment.start.x
-        proj_y = dot_product * line_segment.unit_vector.y + line_segment.start.y
-        
-        return math.sqrt(math.pow(point.x - proj_x, 2) + math.pow(point.y - proj_y, 2))
-    
     def distance_to_projection_on(self, line_segment):
-        return self.distance_from_point_to_projection_on_line_seg(self, line_segment)
+        diff_x = self.x - line_segment.start.x
+        diff_y = self.y - line_segment.start.y
+        
+        return abs(diff_x * line_segment.unit_vector.y - diff_y * line_segment.unit_vector.x)
+        #return self.distance_from_point_to_projection_on_line_seg(self, line_segment)
     
     def rotated(self, angle_in_degrees):
         result = Vec2.rotated(self, angle_in_degrees)
@@ -96,6 +91,16 @@ class LineSegment(object):
     def sine_of_angle_with(self, other_line_segment):
         return self.unit_vector.x * other_line_segment.unit_vector.y - \
         self.unit_vector.y * other_line_segment.unit_vector.x
+        
+    def dist_from_start_to_projection_of(self, point):
+        diff_x = self.start.x - point.x
+        diff_y = self.start.y - point.y
+        return abs(diff_x * self.unit_vector.x + diff_y * self.unit_vector.y)
+    
+    def dist_from_end_to_projection_of(self, point):
+        diff_x = self.end.x - point.x
+        diff_y = self.end.y - point.y
+        return abs(diff_x * self.unit_vector.x + diff_y * self.unit_vector.y)
         
     def almost_equals(self, other):
         return (self.start.almost_equals(other.start) and self.end.almost_equals(other.end)) #or \
