@@ -11,16 +11,20 @@ for readability."""
 
 
 setup(name='traclus_impl',
-      version='0.8.3',
+      version='0.8.4',
       description=LONG_DESCRIPTION,
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',
       author_email='alexpolcyn65@gmail.com',
       license='MIT',
-      packages=['traclus_impl', 'traclus_impl.partitioning', \
-       'traclus_impl.traclus_dbscan'], 
+      packages=['traclus_impl', \
+      'traclus_impl.partitioning', \
+      'traclus_impl.traclus_dbscan', \
+      'traclus_impl.tests', \
+      'traclus_impl.tests.clustering', \
+      'traclus_impl.tests.coordination', \
+      'traclus_impl.tests.partitioning'], 
       install_requires=[
-          'polypaths_planar_override',
 	  'simanneal',
       ],
       zip_safe=False)
