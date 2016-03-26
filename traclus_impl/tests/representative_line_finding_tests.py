@@ -6,7 +6,7 @@ Created on Jan 6, 2016
 import unittest
 from representative_line_finding import get_average_vector, get_rotated_line_segment
 from unit_base_tests import UnitBaseTests
-from polypaths_planar_override import Vec2
+from geometry import Vec2
 import math
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 
@@ -47,14 +47,14 @@ class RepresentativeLineFindingTests(UnitBaseTests):
     def test_basic_central_rotate_90(self):
         before = self.create_simple_line_seg((0, 0), (0, 1))
         after = self.create_simple_line_seg((0, 0), (1, 0))
-        self.assertEquals(get_rotated_line_segment(before, -90), after)
-        self.assertEquals(get_rotated_line_segment(after, 90), before)
+        self.assertTrue(get_rotated_line_segment(before, -90).almost_equals(after))
+        self.assertTrue(get_rotated_line_segment(after, 90).almost_equals(before))
         
     def test_basic_centrial_rotate_90_left_hemi(self):
         before = self.create_simple_line_seg((0, 0), (-1, 0))
         after = self.create_simple_line_seg((0, 0), (0, -1))
-        self.assertEquals(get_rotated_line_segment(before, 90), after)
-        self.assertEquals(get_rotated_line_segment(after, -90), before)
+        self.assertTrue(get_rotated_line_segment(before, 90).almost_equals(after))
+        self.assertTrue(get_rotated_line_segment(after, -90).almost_equals(before))
         
     def test_rotate_by_zero(self):
         test_ob = self.create_simple_line_seg((0, 1), (1, 2))

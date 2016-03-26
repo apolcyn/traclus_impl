@@ -5,8 +5,6 @@ Created on Dec 31, 2015
 '''
 import unittest
 from traclus_dbscan.traclus_dbscan import TrajectoryCluster, TrajectoryLineSegment
-from polypaths_planar_override.line import LineSegment
-from polypaths_planar_override import Point
 from traclus_dbscan.traclus_dbscan import TrajectoryLineSegmentFactory
 from tests.unit_base_tests import UnitBaseTests
 from argparse import ArgumentError

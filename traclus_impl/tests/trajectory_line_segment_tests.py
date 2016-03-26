@@ -6,8 +6,7 @@ Created on Dec 31, 2015
 import unittest
 from _ctypes import ArgumentError
 from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment
-from polypaths_planar_override import LineSegment
-from polypaths_planar_override import Point
+from geometry import Point, LineSegment
 import unit_base_tests
 from test.test__locale import candidate_locales
 from generic_dbscan import ClusterCandidate
@@ -16,10 +15,10 @@ class TestTrajectoryLineSegments(unit_base_tests.UnitBaseTests):
 
     def test_creation(self):
         self.assertRaises((Exception, ArgumentError), TrajectoryLineSegment, \
-                          LineSegment.from_points([Point(0, 0), Point(1, 1)]), -1)
+                          LineSegment(Point(0, 0), Point(1, 1)), -1)
         self.assertRaises((Exception, ArgumentError), TrajectoryLineSegment, None, 1)
         self.assertRaises((Exception, ArgumentError), TrajectoryLineSegment, \
-                          LineSegment.from_points([Point(0, 0), Point(1, 1)]), None)
+                          LineSegment(Point(0, 0), Point(1, 1)), None)
         
     def test_num_neighbor_counting(self):
         line_segment = TrajectoryLineSegment(self.create_simple_line_seg((0, 0), (1, 1)), 1)

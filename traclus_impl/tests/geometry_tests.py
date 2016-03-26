@@ -5,8 +5,8 @@ Created on Mar 24, 2016
 '''
 import unittest
 import math
-from geometry import LineSegment, Point
-from pathclustering.representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+from geometry import LineSegment, Point, Vec2
+from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 
 class GeometryTest(unittest.TestCase):
     horizontal_line = LineSegment.from_tuples((0, 0), (2, 0))
@@ -53,6 +53,15 @@ class GeometryTest(unittest.TestCase):
         run_test_case((-5, -5), (-7, -4), (-6, -2), math.sqrt(1.0 + 4.0))
         run_test_case((0, 0), (4, 2), (4, 6), 4.0)
         run_test_case((0, 2), (4, 2), (4, 6), 4.0)
+        
+    def test_rotation(self):
+        def run_test_case(vector, angle, expected):
+            actual = vector.rotated(angle)
+            self.assertAlmostEquals(expected.x, actual.x, delta=DECIMAL_MAX_DIFF_FOR_EQUALITY)
+            self.assertAlmostEquals(expected.y, actual.y, delta=DECIMAL_MAX_DIFF_FOR_EQUALITY)
+            
+        run_test_case(Vec2(0, 1), -90, Vec2(1, 0))
+        run_test_case(Vec2(math.sqrt(2.0), 0), 45, Vec2(1, 1))
 
         
 if __name__ == "__main__":

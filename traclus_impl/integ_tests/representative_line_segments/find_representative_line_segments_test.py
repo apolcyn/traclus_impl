@@ -6,7 +6,7 @@ Created on Jan 13, 2016
 import unittest
 from tests.unit_base_tests import UnitBaseTests
 from line_segment_averaging import get_representative_line_from_trajectory_line_segments
-from polypaths_planar_override import Point
+from geometry import Point
 
 class FindRepresentativeLineSegmentsTest(UnitBaseTests):
 

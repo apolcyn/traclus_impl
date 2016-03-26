@@ -6,7 +6,7 @@ Created on Feb 14, 2016
 import unittest
 from parameter_estimation import TraclusSimulatedAnnealingState
 from parameter_estimation import TraclusSimulatedAnnealer
-from polypaths_planar_override import Point
+from geometry import Point
 
 """ These tests might just take a few tries to pass. Simulated Annealing results
 rely on some luck with random numbers, but should usually work. """

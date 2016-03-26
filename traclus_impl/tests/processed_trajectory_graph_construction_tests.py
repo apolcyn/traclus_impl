@@ -4,7 +4,7 @@ Created on Feb 20, 2016
 @author: Alex
 '''
 import unittest
-from polypaths_planar_override import Point
+from geometry import Point
 from processed_trajectory_connecting import FilteredTrajectory,\
     build_point_graph, compute_graph_component_ids
 from unit_base_tests import UnitBaseTests

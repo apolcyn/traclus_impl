@@ -3,8 +3,8 @@ Created on Dec 31, 2015
 
 @author: Alex
 '''
-from traclus_impl.generic_dbscan import Cluster, ClusterCandidate, ClusterFactory
-from traclus_impl.distance_functions import perpendicular_distance, angular_distance, parrallel_distance
+from generic_dbscan import Cluster, ClusterCandidate, ClusterFactory
+from distance_functions import perpendicular_distance, angular_distance, parrallel_distance
 
 class TrajectoryLineSegmentFactory():
     def new_trajectory_line_seg(self, line_segment, trajectory_id):

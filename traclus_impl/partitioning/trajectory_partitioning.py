@@ -3,8 +3,8 @@ Created on Jan 7, 2016
 
 @author: Alex
 '''
-from polypaths_planar_override.line import LineSegment
-from traclus_impl.distance_functions import perpendicular_distance, \
+from geometry import LineSegment
+from distance_functions import perpendicular_distance, \
 angular_distance
 import math
 from mutable_float import MutableFloat
@@ -168,7 +168,7 @@ def no_partition_cost_computer(trajectory_point_list, low_index, high_index, \
     return total_cost
 
 def get_line_segment_from_points(point_a, point_b):
-    return LineSegment.from_points([point_a, point_b])
+    return LineSegment(point_a, point_b)
 
 def get_trajectory_line_segment_iterator_adapter(iterator_getter, get_line_segment_from_points_func):
     def _func(list, low, high, get_line_segment_from_points_func=get_line_segment_from_points_func):

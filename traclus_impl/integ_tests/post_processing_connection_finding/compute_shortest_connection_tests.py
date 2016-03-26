@@ -4,7 +4,7 @@ Created on Feb 22, 2016
 @author: Alex
 '''
 import unittest
-from my_planar_override import Point
+from geometry import Point
 import processed_trajectory_connecting
 from processed_trajectory_connecting import FilteredTrajectory,\
     compute_graph_component_ids, find_shortest_connection

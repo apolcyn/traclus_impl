@@ -5,11 +5,11 @@ Created on Jan 13, 2016
 '''
 import unittest
 from tests.unit_base_tests import UnitBaseTests
-from polypaths_planar_override import Point
+from geometry import Point
 from coordination import the_whole_enchilada
 import math
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
-from traclus_impl.generic_dbscan import ClusterFactory
+from generic_dbscan import ClusterFactory
 from traclus_dbscan.traclus_dbscan import TrajectoryClusterFactory,\
     TrajectoryLineSegment
 from hooks import clusters_hook
@@ -35,7 +35,7 @@ class JumboShrimpTest(UnitBaseTests):
     def test_two_line_segs(self):
         points = [[Point(0, 1), Point(1, 1)], \
                   [Point(0, 0), Point(1, 0)]]
-        expected = [[Point(0, 0.5), (1, 0.5)]]
+        expected = [[Point(0, 0.5), Point(1, 0.5)]]
         res = the_whole_enchilada(point_iterable_list=points, \
                                   epsilon=100, min_neighbors=1, min_num_trajectories_in_cluster=2, min_vertical_lines=2, min_prev_dist=1.0)
         self.verify_iterable_works_more_than_once(iterable=res, list_ob=expected)
@@ -73,7 +73,7 @@ class JumboShrimpTest(UnitBaseTests):
                   [Point(1, 2), Point(2, 1)]]
         expected = [[Point(0.5, 1.5), Point(1.5, 0.5)]]
         res = the_whole_enchilada(point_iterable_list=points, \
-                                  epsilon=math.sqrt(2.0), min_neighbors=1, min_num_trajectories_in_cluster=2, \
+                                  epsilon=math.sqrt(2.000000001), min_neighbors=1, min_num_trajectories_in_cluster=2, \
                                   min_vertical_lines=2, \
                                   min_prev_dist=math.sqrt(2.0) - DECIMAL_MAX_DIFF_FOR_EQUALITY)
         self.verify_point_iterable_almost_equals_list(iterable=res, expected_list=expected)

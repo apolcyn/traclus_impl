@@ -4,18 +4,17 @@ Created on Jan 6, 2016
 @author: Alex
 '''
 import unittest
-from polypaths_planar_override import LineSegment
-from polypaths_planar_override import Point
+from geometry import LineSegment, Point
 from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 
 class UnitBaseTests(unittest.TestCase):
     def create_trajectory_line_seg(self, start, end, traj_id, original_position=None):
-        return TrajectoryLineSegment(LineSegment.from_points([Point(start[0], start[1]), \
-                                                              Point(end[0], end[1])]), traj_id, original_position)
+        return TrajectoryLineSegment(LineSegment(Point(start[0], start[1]), \
+                                                              Point(end[0], end[1])), traj_id, original_position)
         
     def create_simple_line_seg(self, start, end):
-        return LineSegment.from_points([Point(start[0], start[1]), Point(end[0], end[1])])
+        return LineSegment(Point(start[0], start[1]), Point(end[0], end[1]))
     
     def verify_iteration_raises(self, exception_type, iterable):
         func = lambda x: [h for h in x]

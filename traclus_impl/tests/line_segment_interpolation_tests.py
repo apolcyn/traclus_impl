@@ -5,13 +5,12 @@ Created on Jan 5, 2016
 '''
 import unittest
 from line_segment_averaging import interpolate_within_line_segment
-from polypaths_planar_override import Point
-from polypaths_planar_override import LineSegment
+from geometry import LineSegment
 
 class LineSegmentInterpolationTest(unittest.TestCase):
 
     def create_line_segment(self, start, end):
-        return LineSegment.from_points([Point(start[0], start[1]), Point(end[0], end[1])])
+        return LineSegment.from_tuples(start, end)
 
     def setUp(self):
         pass

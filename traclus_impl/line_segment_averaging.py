@@ -6,7 +6,7 @@ Created on Jan 5, 2016
 
 from representative_trajectory_average_inputs import get_representative_trajectory_average_inputs,\
     DECIMAL_MAX_DIFF_FOR_EQUALITY
-from polypaths_planar_override import Point
+from geometry import Point
 from representative_line_finding import get_average_vector, get_rotated_line_segment
 
 def get_representative_line_from_trajectory_line_segments(trajectory_line_segments, min_vertical_lines, min_prev_dist):
@@ -19,7 +19,7 @@ def get_representative_line_from_trajectory_line_segments(trajectory_line_segmen
     representative_points = get_representative_line_from_rotated_line_segments(trajectory_line_segments=trajectory_line_segments, \
                                                                                min_vertical_lines=min_vertical_lines, \
                                                                                min_prev_dist=min_prev_dist)
-    return map(lambda x: x.rotated(angle=average_trajectory_vector.angle), representative_points)
+    return map(lambda x: x.rotated(angle_in_degrees=average_trajectory_vector.angle), representative_points)
 
 def get_representative_line_from_rotated_line_segments(trajectory_line_segments, min_vertical_lines, min_prev_dist):
     inputs = get_representative_trajectory_average_inputs(trajectory_line_segments=trajectory_line_segments, \
@@ -44,7 +44,7 @@ def interpolate_within_line_segment(line_segment, horizontal_coordinate):
     elif line_segment.start.x - line_segment.end.x == 0.0:
         return (line_segment.end.y - line_segment.start.y) / 2.0 + line_segment.start.y
     else:
-        return (horizontal_coordinate - line_segment.start.x) / (line_segment.end.x - line_segment.start.x) * \
+        return float((horizontal_coordinate - line_segment.start.x)) / (line_segment.end.x - line_segment.start.x) * \
             (line_segment.end.y - line_segment.start.y) + line_segment.start.y        
         
 def line_segment_averaging_set_iterable(line_segments_to_average):

@@ -4,7 +4,7 @@ Created on Feb 10, 2016
 @author: Alex
 '''
 import unittest
-from traclus_impl.generic_dbscan import ClusterCandidate
+from generic_dbscan import ClusterCandidate
 from partitioning.mutable_float import MutableFloat
 
 class Test(unittest.TestCase):

@@ -3,8 +3,7 @@ Created on Jan 6, 2016
 
 @author: Alex
 '''
-from polypaths_planar_override import Vec2
-from polypaths_planar_override import LineSegment
+from geometry import Vec2, LineSegment
 
 def get_average_vector(line_segment_list):
     if len(line_segment_list) < 1:
@@ -29,4 +28,4 @@ def get_rotated_line_segment(line_segment, angle_in_degrees):
     new_start = line_segment.start.rotated(angle_in_degrees)
     new_end = line_segment.end.rotated(angle_in_degrees)
     
-    return LineSegment.from_points([new_start, new_end])
+    return LineSegment.from_tuples((new_start.x, new_start.y), (new_end.x, new_end.y))

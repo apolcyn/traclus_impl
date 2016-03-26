@@ -7,8 +7,7 @@ import unittest
 from representative_trajectory_average_inputs import get_representative_trajectory_average_inputs,\
     get_sorted_line_seg_endpoints, DECIMAL_MAX_DIFF_FOR_EQUALITY
 from traclus_dbscan.traclus_dbscan import TrajectoryLineSegment
-from polypaths_planar_override import Point
-from polypaths_planar_override.line import LineSegment
+from geometry import Point, LineSegment
 import random
 
 class RepresentativeTrajectoryAverageInputsTest(unittest.TestCase):
@@ -16,8 +15,8 @@ class RepresentativeTrajectoryAverageInputsTest(unittest.TestCase):
         if orig_pos == None:
             orig_pos = random.randint(0, 1000)
         return {'trajectory_line_segment': \
-                TrajectoryLineSegment(LineSegment.from_points([Point(horizontal_start, random.randint(0, 1000)), \
-                                                               Point(horizontal_end, random.randint(0, 1000))]), \
+                TrajectoryLineSegment(LineSegment(Point(horizontal_start, random.randint(0, 1000)), \
+                                                               Point(horizontal_end, random.randint(0, 1000))), \
                                       trajectory_id, orig_pos), \
                 'line_set_ids': line_set_ids}
         
@@ -78,8 +77,8 @@ class RepresentativeTrajectoryAverageInputsTest(unittest.TestCase):
         self.verify(self.build_test_ob(lines,line_sets, 1)) 
         
     def test_two_short_line_endpoints_get_picked(self):
-        lines = [LineSegment.from_points([Point(0, 0), Point(1, 0)]), \
-                 LineSegment.from_points([Point(0, 1), Point(1, 1)])]
+        lines = [LineSegment(Point(0, 0), Point(1, 0)), \
+                 LineSegment(Point(0, 1), Point(1, 1))]
         traj_lines = [TrajectoryLineSegment(lines[0], 0), \
                       TrajectoryLineSegment(lines[1], 1)]
         res = get_representative_trajectory_average_inputs(trajectory_line_segments=traj_lines, \
@@ -88,8 +87,8 @@ class RepresentativeTrajectoryAverageInputsTest(unittest.TestCase):
         self.assertEquals(len(res), expected)
         
     def test_three_line_sets_should_result(self):
-        lines = [LineSegment.from_points([Point(0, 0), Point(1, 0)]), \
-                 LineSegment.from_points([Point(0.5, 1), Point(1.0, 1)])]
+        lines = [LineSegment(Point(0, 0), Point(1, 0)), \
+                 LineSegment(Point(0.5, 1), Point(1.0, 1))]
         traj_lines = [TrajectoryLineSegment(lines[0], 0), \
                       TrajectoryLineSegment(lines[1], 1)]
         res = get_representative_trajectory_average_inputs(trajectory_line_segments=traj_lines, \
@@ -98,8 +97,8 @@ class RepresentativeTrajectoryAverageInputsTest(unittest.TestCase):
         self.assertEquals(len(res), expected)
         
     def test_four_line_sets_should_result(self):
-        lines = [LineSegment.from_points([Point(0, 0), Point(1, 0)]), \
-                 LineSegment.from_points([Point(0.5, 1), Point(1.5, 1)])]
+        lines = [LineSegment(Point(0, 0), Point(1, 0)), \
+                 LineSegment(Point(0.5, 1), Point(1.5, 1))]
         traj_lines = [TrajectoryLineSegment(lines[0], 0), \
                       TrajectoryLineSegment(lines[1], 1)]
         res = get_representative_trajectory_average_inputs(trajectory_line_segments=traj_lines, \

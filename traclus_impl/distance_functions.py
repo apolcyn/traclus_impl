@@ -3,21 +3,7 @@ Created on Dec 29, 2015
 
 @author: Alex
 '''
-from polypaths_planar_override import Line
-from polypaths_planar_override import Vec2
 import math
-
-def get_longer_line(line_a, line_b):
-    if line_a.length >= line_b.length:
-        return line_a
-    else:
-        return line_b
-    
-def get_shorter_line(line_a, line_b):
-    if line_a.length < line_b.length:
-        return line_a
-    else:
-        return line_b
     
 def determine_longer_and_shorter_lines(line_a, line_b):
     if line_a.length < line_b.length:
@@ -57,14 +43,6 @@ def angular_distance(line_a, line_b):
     longer_line, shorter_line = determine_longer_and_shorter_lines(line_a, line_b)
     sine_coefficient = shorter_line.sine_of_angle_with(longer_line)
     return abs(sine_coefficient * shorter_line.length)
-    
-def __angular_distance(line_a, line_b):
-    longer_line = get_longer_line(line_a, line_b)
-    shorter_line = get_shorter_line(line_a, line_b)
-    angle_in_radians = math.radians(longer_line.direction.angle_to(shorter_line.direction))
-    sine_coefficient = math.sin(angle_in_radians) 
-    
-    return abs(sine_coefficient * shorter_line.length)
 
 #def __parrallel_distance(line_a, line_b):
 
@@ -78,15 +56,6 @@ def parrallel_distance(line_a, line_b):
                  __func(shorter_line.end, longer_line.start), \
                  __func(shorter_line.end, longer_line.end)])
     
-                 
-
-def __parrallel_distance(line_a, line_b):
-    longer_line = get_longer_line(line_a, line_b)
-    shorter_line = get_shorter_line(line_a, line_b)
-    dist_a = dist_to_projection_point(longer_line, longer_line.line.project(shorter_line.start))
-    dist_b = dist_to_projection_point(longer_line, longer_line.line.project(shorter_line.end))
-    
-    return min(dist_a, dist_b)   
     
 def dist_to_projection_point(line, proj):
     return min(proj.distance_to(line.start), proj.distance_to(line.end))

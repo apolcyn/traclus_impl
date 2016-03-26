@@ -6,7 +6,7 @@ Created on Dec 29, 2015
 import unittest
 import trajectory
 from trajectory import Trajectory
-from polypaths_planar_override import Point
+from geometry import Point
 import math
 
 class TrajectoryCostTests(unittest.TestCase):

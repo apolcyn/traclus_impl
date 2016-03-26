@@ -4,7 +4,7 @@ Created on Feb 19, 2016
 @author: Alex
 '''
 import math
-from polypaths_planar_override.line import LineSegment
+from geometry import LineSegment
 import collections
 from heapq import heappush
 from heapq import heappop
@@ -208,7 +208,7 @@ def get_nearest_point_line_segs(traj, all_trajectories):
                     math.pow(other_pt.y - point.y, 2)
                 if min_square_dist == None or temp_square_dist < min_square_dist:
                     min_square_dist = temp_square_dist
-                    min_dist_line_seg = LineSegment.from_points([point, other_pt])
+                    min_dist_line_seg = LineSegment(point, other_pt)
         return min_dist_line_seg
     
     nearest_to_start = \
