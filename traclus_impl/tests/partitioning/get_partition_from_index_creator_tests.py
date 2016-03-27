@@ -3,9 +3,8 @@ Created on Jan 9, 2016
 
 @author: Alex
 '''
-import unittest
-
 from traclus_impl.trajectory_partitioning import get_partition_from_index_creator
+import unittest
 
 
 class GetPartitionFromIndexCreatorTest(unittest.TestCase):
