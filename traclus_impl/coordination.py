@@ -26,8 +26,8 @@ def run_traclus(point_iterable_list, epsilon, min_neighbors, min_num_trajectorie
                 if prev.distance_to(pt) > 0.0:
                     cleaned_traj.append(pt)
                     prev = pt           
-        if len(cleaned_traj) > 1:
-            cleaned_input.append(cleaned_traj)
+            if len(cleaned_traj) > 1:
+                cleaned_input.append(cleaned_traj)
     
     return the_whole_enchilada(point_iterable_list=cleaned_input, \
                         epsilon=epsilon, \
