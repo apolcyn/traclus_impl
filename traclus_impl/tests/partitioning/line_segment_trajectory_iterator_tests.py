@@ -4,9 +4,12 @@ Created on Jan 7, 2016
 @author: Alex
 '''
 import unittest
-from trajectory_partitioning import get_trajectory_line_segment_iterator
-from trajectory_partitioning import get_line_segment_from_points
-from tests import unit_base_tests
+
+from traclus_impl.tests import unit_base_tests
+
+from traclus_impl.trajectory_partitioning import get_line_segment_from_points
+from traclus_impl.trajectory_partitioning import get_trajectory_line_segment_iterator
+
 
 class LineSegmentTrajectoryIteratorTest(unit_base_tests.UnitBaseTests):
 

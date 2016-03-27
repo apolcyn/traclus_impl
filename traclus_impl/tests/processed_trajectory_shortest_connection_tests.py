@@ -4,7 +4,7 @@ Created on Feb 22, 2016
 @author: Alex
 '''
 import unittest
-from processed_trajectory_connecting import find_all_possible_connections
+from traclus_impl.processed_trajectory_connecting import find_all_possible_connections
 
 class ProcessedTrajectoryShortestConnectionTest(unittest.TestCase):
     class MockPtNode:

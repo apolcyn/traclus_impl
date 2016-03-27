@@ -4,9 +4,11 @@ Created on Jan 10, 2016
 @author: Alex
 '''
 import unittest
-from coordination import get_trajectory_line_segments_from_points_iterable
-from tests.unit_base_tests import UnitBaseTests
-from mutable_float import MutableNumber
+
+from traclus_impl.coordination import get_trajectory_line_segments_from_points_iterable
+from traclus_impl.mutable_float import MutableNumber
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+
 
 class GetTrajectoryLineSegmentsFromPointsTest(UnitBaseTests):
 

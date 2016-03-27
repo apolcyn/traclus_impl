@@ -3,10 +3,13 @@ Created on Mar 26, 2016
 
 @author: Alex
 '''
-import unittest
 import json
-from geometry import Point
-from coordination import the_whole_enchilada, run_traclus
+import unittest
+import os
+
+from traclus_impl.coordination import the_whole_enchilada, run_traclus
+from traclus_impl.geometry import Point
+
 
 class CampusTraclusTest(unittest.TestCase):
     EPSILON = 0.00016
@@ -18,10 +21,16 @@ class CampusTraclusTest(unittest.TestCase):
     NUM_EXPECTED_TRAJECTORIES = 4
     
     def setUp(self):
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+        input_file_name = \
+        os.path.join(current_dir, 'raw_campus_trajectories.txt')
+        expected_output_file_name = \
+        os.path.join(current_dir, 'campus_trajectories_traclus_output.txt')
+        
         self.raw_input = \
-        self.read_trajectory_lists_from_file_input('raw_campus_trajectories')
+        self.read_trajectory_lists_from_file_input(input_file_name)
         self.expected_output = \
-        self.read_trajectory_lists_from_file_input('campus_trajectories_traclus_output')       
+        self.read_trajectory_lists_from_file_input(expected_output_file_name)       
         
     def read_trajectory_lists_from_file_input(self, file_name):
         parsed_input = None

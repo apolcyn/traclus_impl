@@ -4,9 +4,9 @@ Created on Dec 31, 2015
 @author: Alex
 '''
 import unittest
-from traclus_dbscan import TrajectoryCluster, TrajectoryLineSegment
-from traclus_dbscan import TrajectoryLineSegmentFactory
-from tests.unit_base_tests import UnitBaseTests
+from traclus_impl.traclus_dbscan import TrajectoryCluster, TrajectoryLineSegment
+from traclus_impl.traclus_dbscan import TrajectoryLineSegmentFactory
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
 from argparse import ArgumentError
 
 class TrajectoryClusterTests(UnitBaseTests):

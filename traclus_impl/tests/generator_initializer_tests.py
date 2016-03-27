@@ -3,9 +3,11 @@ Created on Jan 6, 2016
 
 @author: Alex
 '''
+from traclus_impl.generator_initializer import GeneratorInitializer
 import unittest
+
 from unit_base_tests import UnitBaseTests
-from generator_initializer import GeneratorInitializer
+
 
 def classless_generator(list):
     for item in list:

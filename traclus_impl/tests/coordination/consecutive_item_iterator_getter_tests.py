@@ -4,8 +4,10 @@ Created on Jan 10, 2016
 @author: Alex
 '''
 import unittest
-from tests.unit_base_tests import UnitBaseTests
-from coordination import consecutive_item_func_iterator_getter
+
+from traclus_impl.coordination import consecutive_item_func_iterator_getter
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+
 
 class Test(UnitBaseTests):
 

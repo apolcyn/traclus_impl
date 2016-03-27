@@ -3,10 +3,11 @@ Created on Jan 6, 2016
 
 @author: Alex
 '''
+from traclus_impl.geometry import LineSegment, Point
+from traclus_impl.representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+from traclus_impl.traclus_dbscan import TrajectoryLineSegment
 import unittest
-from geometry import LineSegment, Point
-from traclus_dbscan import TrajectoryLineSegment
-from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+
 
 class UnitBaseTests(unittest.TestCase):
     def create_trajectory_line_seg(self, start, end, traj_id, original_position=None):

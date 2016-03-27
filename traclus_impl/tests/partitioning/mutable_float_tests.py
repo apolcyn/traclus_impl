@@ -4,7 +4,9 @@ Created on Jan 8, 2016
 @author: Alex
 '''
 import unittest
-from mutable_float import MutableFloat
+
+from traclus_impl.mutable_float import MutableFloat
+
 
 class MutableFloatTest(unittest.TestCase):
 

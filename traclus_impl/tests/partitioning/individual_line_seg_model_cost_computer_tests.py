@@ -4,10 +4,10 @@ Created on Jan 9, 2016
 @author: Alex
 '''
 import unittest
-from tests.unit_base_tests import UnitBaseTests
-from trajectory_partitioning import individual_line_seg_model_cost_computer
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+from traclus_impl.trajectory_partitioning import individual_line_seg_model_cost_computer
 import math
-from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+from traclus_impl.representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 
 class IndividualLineSegModelCostComputerTest(UnitBaseTests):
 

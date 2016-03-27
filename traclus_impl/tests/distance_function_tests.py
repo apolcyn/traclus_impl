@@ -3,14 +3,14 @@ Created on Dec 29, 2015
 
 @author: Alex
 '''
-import unittest 
-import distance_functions
 import math
-from geometry import LineSegment, Point
-from distance_functions import parrallel_distance, perpendicular_distance,\
+from traclus_impl.distance_functions import parrallel_distance, perpendicular_distance, \
     angular_distance, get_total_distance_function
-from mutable_float import MutableFloat, MutableNumber
-        
+from traclus_impl.geometry import LineSegment
+from traclus_impl.mutable_float import MutableFloat, MutableNumber
+import unittest 
+
+
 class DistanceFunctionTest(unittest.TestCase):
     
     DECIMAL_PRECISION = 11

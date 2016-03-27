@@ -3,13 +3,14 @@ Created on Jan 10, 2016
 
 @author: Alex
 '''
-from trajectory_partitioning import get_line_segment_from_points,\
-    call_partition_trajectory
 from generic_dbscan import dbscan
-from traclus_dbscan import TrajectoryLineSegmentFactory,\
-    TrajectoryClusterFactory, TrajectoryLineSegmentCandidateIndex
-from line_segment_averaging import get_representative_line_from_trajectory_line_segments
 import hooks
+from line_segment_averaging import get_representative_line_from_trajectory_line_segments
+from traclus_dbscan import TrajectoryLineSegmentFactory, \
+    TrajectoryClusterFactory, TrajectoryLineSegmentCandidateIndex
+from trajectory_partitioning import get_line_segment_from_points, \
+    call_partition_trajectory
+
 
 def run_traclus(point_iterable_list, epsilon, min_neighbors, min_num_trajectories_in_cluster, \
                         min_vertical_lines, \

@@ -5,6 +5,7 @@ Created on Dec 30, 2015
 '''
 import collections
 
+
 class ClusterCandidate:
     def __init__(self):
         self.cluster = None

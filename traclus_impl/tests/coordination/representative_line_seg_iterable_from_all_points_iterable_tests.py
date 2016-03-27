@@ -4,8 +4,10 @@ Created on Jan 13, 2016
 @author: Alex
 '''
 import unittest
-from coordination import representative_line_seg_iterable_from_all_points_iterable
-from tests.unit_base_tests import UnitBaseTests
+
+from traclus_impl.coordination import representative_line_seg_iterable_from_all_points_iterable
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+
 
 class RepresentativeLineSegIterableFromAllPointsIterableTest(UnitBaseTests):
     

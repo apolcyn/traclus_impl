@@ -3,11 +3,11 @@ Created on Dec 29, 2015
 
 @author: Alex
 '''
-import unittest
-import trajectory
-from trajectory import Trajectory
-from geometry import Point
 import math
+from traclus_impl.geometry import Point
+from traclus_impl.trajectory import Trajectory
+import unittest
+
 
 class TrajectoryCostTests(unittest.TestCase):
     

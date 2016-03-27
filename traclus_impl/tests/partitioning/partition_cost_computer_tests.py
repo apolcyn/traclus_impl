@@ -4,10 +4,12 @@ Created on Jan 7, 2016
 @author: Alex
 '''
 import unittest
-from tests.unit_base_tests import UnitBaseTests
-from trajectory_partitioning import partition_cost_computer
-from trajectory_partitioning import no_partition_cost_computer
-from mutable_float import MutableFloat, MutableNumber
+
+from traclus_impl.mutable_float import MutableFloat, MutableNumber
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+from traclus_impl.trajectory_partitioning import no_partition_cost_computer
+from traclus_impl.trajectory_partitioning import partition_cost_computer
+
 
 class PartitionCostComputerTest(unittest.TestCase):
     

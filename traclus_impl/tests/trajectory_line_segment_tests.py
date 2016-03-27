@@ -5,12 +5,12 @@ Created on Dec 31, 2015
 '''
 import unittest
 from _ctypes import ArgumentError
-from traclus_dbscan import TrajectoryLineSegment,\
+from traclus_impl.traclus_dbscan import TrajectoryLineSegment,\
     TrajectoryLineSegmentCandidateIndex
-from geometry import Point, LineSegment
+from traclus_impl.geometry import Point, LineSegment
 import unit_base_tests
 from test.test__locale import candidate_locales
-from generic_dbscan import ClusterCandidate
+from traclus_impl.generic_dbscan import ClusterCandidate
 
 class TestTrajectoryLineSegments(unit_base_tests.UnitBaseTests):
 

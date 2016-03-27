@@ -5,7 +5,7 @@ Created on Feb 11, 2016
 '''
 import unit_base_tests
 import unittest
-from parameter_estimation import find_entropy
+from traclus_impl.parameter_estimation import find_entropy
 
 class EntropyCalculationTest(unit_base_tests.UnitBaseTests):
     

@@ -4,8 +4,10 @@ Created on Jan 2, 2016
 @author: Alex
 '''
 import unittest
-from linked_list import LinkedList
-from linked_list import LinkedListNode
+
+from traclus_impl.linked_list import LinkedList
+from traclus_impl.linked_list import LinkedListNode
+
 
 class Test(unittest.TestCase):
     

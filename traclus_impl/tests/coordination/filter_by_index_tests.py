@@ -4,8 +4,10 @@ Created on Jan 10, 2016
 @author: Alex
 '''
 import unittest
-from coordination import filter_by_indices
-from tests.unit_base_tests import UnitBaseTests
+
+from traclus_impl.coordination import filter_by_indices
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+
 
 class IndexFilteringTest(UnitBaseTests):
 

@@ -4,9 +4,11 @@ Created on Jan 8, 2016
 @author: Alex
 '''
 import unittest
-from trajectory_partitioning import partition_trajectory
-from tests.unit_base_tests import UnitBaseTests
-from mutable_float import MutableNumber
+
+from traclus_impl.mutable_float import MutableNumber
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+from traclus_impl.trajectory_partitioning import partition_trajectory
+
 
 class PartitioningTest(UnitBaseTests):
     

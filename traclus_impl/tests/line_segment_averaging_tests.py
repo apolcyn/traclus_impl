@@ -3,14 +3,15 @@ Created on Jan 6, 2016
 
 @author: Alex
 '''
-import unittest
-from line_segment_averaging import number_average,\
+from traclus_impl.line_segment_averaging import get_mean_vertical_coordinate_in_line_segments
+from traclus_impl.line_segment_averaging import number_average, \
     line_segment_averaging_set_iterable
-from linked_list import LinkedList
-from tests import unit_base_tests
-from line_segment_averaging import get_mean_vertical_coordinate_in_line_segments
-from traclus_dbscan import TrajectoryLineSegment,\
-    TrajectoryLineSegmentFactory
+from traclus_impl.linked_list import LinkedList
+from traclus_impl.traclus_dbscan import TrajectoryLineSegmentFactory
+import unittest
+
+import unit_base_tests
+
 
 def simple_func(num):
     return num

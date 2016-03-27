@@ -4,9 +4,11 @@ Created on Jan 13, 2016
 @author: Alex
 '''
 import unittest
-from tests.unit_base_tests import UnitBaseTests
-from coordination import get_trajectory_line_segments_from_points_iterable
-from coordination import get_all_trajectory_line_segments_iterable_from_all_points_iterable
+
+from traclus_impl.coordination import get_all_trajectory_line_segments_iterable_from_all_points_iterable
+from traclus_impl.coordination import get_trajectory_line_segments_from_points_iterable
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+
 
 class GetTrajectoryLineSegmentsFromPointsIterableTest(UnitBaseTests):
     

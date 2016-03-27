@@ -4,10 +4,10 @@ Created on Jan 1, 2016
 @author: Alex
 '''
 import unittest
-from representative_trajectory_average_inputs import get_representative_trajectory_average_inputs,\
+from traclus_impl.representative_trajectory_average_inputs import get_representative_trajectory_average_inputs,\
     get_sorted_line_seg_endpoints, DECIMAL_MAX_DIFF_FOR_EQUALITY
-from traclus_dbscan import TrajectoryLineSegment
-from geometry import Point, LineSegment
+from traclus_impl.traclus_dbscan import TrajectoryLineSegment
+from traclus_impl.geometry import Point, LineSegment
 import random
 
 class RepresentativeTrajectoryAverageInputsTest(unittest.TestCase):

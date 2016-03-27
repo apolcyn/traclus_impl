@@ -4,8 +4,8 @@ Created on Feb 10, 2016
 @author: Alex
 '''
 import unittest
-from generic_dbscan import ClusterCandidate, ClusterCandidateIndex
-from mutable_float import MutableFloat
+from traclus_impl.generic_dbscan import ClusterCandidate, ClusterCandidateIndex
+from traclus_impl.mutable_float import MutableFloat
 
 class Test(unittest.TestCase):
     

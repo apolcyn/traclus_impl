@@ -4,7 +4,7 @@ Created on Feb 20, 2016
 @author: Alex
 '''
 import unittest
-from processed_trajectory_connecting import compute_shortest_path
+from traclus_impl.processed_trajectory_connecting import compute_shortest_path
 
 
 class FilteredTrajectoryGraphPathFindingTest(unittest.TestCase):

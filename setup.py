@@ -11,7 +11,7 @@ for readability."""
 
 
 setup(name='traclus_impl',
-      version='0.8.5',
+      version='0.9.1',
       description=LONG_DESCRIPTION,
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',
@@ -21,7 +21,9 @@ setup(name='traclus_impl',
       'traclus_impl.tests', \
       'traclus_impl.tests.clustering', \
       'traclus_impl.tests.coordination', \
-      'traclus_impl.tests.partitioning'], 
+      'traclus_impl.tests.partitioning', \
+      'traclus_impl.integ_tests'],
+      package_data={'traclus_impl.integ_tests': ['*.txt']},
       install_requires=[
 	  'simanneal',
       ],

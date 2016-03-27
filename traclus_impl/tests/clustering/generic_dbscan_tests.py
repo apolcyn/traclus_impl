@@ -4,8 +4,8 @@ Created on Dec 30, 2015
 @author: Alex
 '''
 import unittest
-from geometry import Point
-from generic_dbscan import ClusterCandidate, ClusterFactory, dbscan, ClusterCandidateIndex
+from traclus_impl.geometry import Point
+from traclus_impl.generic_dbscan import ClusterCandidate, ClusterFactory, dbscan, ClusterCandidateIndex
 
 class TestPoint(ClusterCandidate):
     def __init__(self, x, y):

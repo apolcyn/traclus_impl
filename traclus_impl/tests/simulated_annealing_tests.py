@@ -4,8 +4,8 @@ Created on Feb 13, 2016
 @author: Alex
 '''
 import unittest
-from simulated_annealing import anneal_step
-from simulated_annealing import SimulatedAnnealingState
+from traclus_impl.simulated_annealing import anneal_step
+from traclus_impl.simulated_annealing import SimulatedAnnealingState
 import random
 
 class SimulatedAnnealingTest(unittest.TestCase):

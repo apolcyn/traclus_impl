@@ -10,7 +10,7 @@ from processed_trajectory_connecting import FilteredTrajectory,\
     compute_graph_component_ids, find_shortest_connection
 from processed_trajectory_connecting import build_point_graph
 import math
-from tests.unit_base_tests import UnitBaseTests
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
 from processed_trajectory_connecting import get_find_other_nearby_neighbors_func
 
 class ComputeShortestConnectionTest(UnitBaseTests):

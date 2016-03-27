@@ -3,10 +3,11 @@ Created on Mar 24, 2016
 
 @author: Alex
 '''
-import unittest
 import math
-from geometry import LineSegment, Point, Vec2
-from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+from traclus_impl.geometry import LineSegment, Point, Vec2
+from traclus_impl.representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+import unittest
+
 
 class GeometryTest(unittest.TestCase):
     horizontal_line = LineSegment.from_tuples((0, 0), (2, 0))

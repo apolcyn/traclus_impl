@@ -3,16 +3,18 @@ Created on Jan 13, 2016
 
 @author: Alex
 '''
-import unittest
-from tests.unit_base_tests import UnitBaseTests
-from geometry import Point
-from coordination import the_whole_enchilada
 import math
-from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
-from generic_dbscan import ClusterFactory
-from traclus_dbscan import TrajectoryClusterFactory,\
+import unittest
+
+from traclus_impl.coordination import the_whole_enchilada
+from traclus_impl.generic_dbscan import ClusterFactory
+from traclus_impl.geometry import Point
+from traclus_impl.hooks import clusters_hook
+from traclus_impl.representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+from traclus_impl.traclus_dbscan import TrajectoryClusterFactory, \
     TrajectoryLineSegment
-from hooks import clusters_hook
+
 
 class JumboShrimpTest(UnitBaseTests):
     

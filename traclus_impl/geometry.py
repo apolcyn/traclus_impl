@@ -4,7 +4,9 @@ Created on Mar 23, 2016
 @author: Alex
 '''
 import math
+
 from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+
 
 _delta = 0.000000001
 

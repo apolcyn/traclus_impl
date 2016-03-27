@@ -4,7 +4,7 @@ Created on Jan 13, 2016
 @author: Alex
 '''
 import unittest
-from tests.unit_base_tests import UnitBaseTests
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
 from line_segment_averaging import get_representative_line_from_trajectory_line_segments
 from geometry import Point
 

@@ -4,11 +4,11 @@ Created on Jan 6, 2016
 @author: Alex
 '''
 import unittest
-from representative_line_finding import get_average_vector, get_rotated_line_segment
+from traclus_impl.representative_line_finding import get_average_vector, get_rotated_line_segment
 from unit_base_tests import UnitBaseTests
-from geometry import Vec2
+from traclus_impl.geometry import Vec2
 import math
-from representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
+from traclus_impl.representative_trajectory_average_inputs import DECIMAL_MAX_DIFF_FOR_EQUALITY
 
 class RepresentativeLineFindingTests(UnitBaseTests):
 

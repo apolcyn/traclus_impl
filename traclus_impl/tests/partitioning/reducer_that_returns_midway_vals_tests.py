@@ -4,8 +4,10 @@ Created on Jan 9, 2016
 @author: Alex
 '''
 import unittest
-from tests.unit_base_tests import UnitBaseTests
-from trajectory_partitioning import get_number_list_reducer_that_returns_each_midway_val
+
+from traclus_impl.tests.unit_base_tests import UnitBaseTests
+from traclus_impl.trajectory_partitioning import get_number_list_reducer_that_returns_each_midway_val
+
 
 class ReducerThatReturnsMidwayValsTests(UnitBaseTests):
 

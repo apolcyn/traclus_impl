@@ -4,8 +4,8 @@ Created on Jan 5, 2016
 @author: Alex
 '''
 import unittest
-from line_segment_averaging import interpolate_within_line_segment
-from geometry import LineSegment
+from traclus_impl.line_segment_averaging import interpolate_within_line_segment
+from traclus_impl.geometry import LineSegment
 
 class LineSegmentInterpolationTest(unittest.TestCase):
 

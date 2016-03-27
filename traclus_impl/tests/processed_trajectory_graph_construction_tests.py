@@ -4,8 +4,8 @@ Created on Feb 20, 2016
 @author: Alex
 '''
 import unittest
-from geometry import Point
-from processed_trajectory_connecting import FilteredTrajectory,\
+from traclus_impl.geometry import Point
+from traclus_impl.processed_trajectory_connecting import FilteredTrajectory,\
     build_point_graph, compute_graph_component_ids
 from unit_base_tests import UnitBaseTests
 
