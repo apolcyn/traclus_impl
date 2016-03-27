@@ -11,6 +11,33 @@ from traclus_dbscan import TrajectoryLineSegmentFactory,\
 from line_segment_averaging import get_representative_line_from_trajectory_line_segments
 import hooks
 
+def run_traclus(point_iterable_list, epsilon, min_neighbors, min_num_trajectories_in_cluster, \
+                        min_vertical_lines, \
+                        min_prev_dist,\
+                        partitioned_points_hook=hooks.partitioned_points_hook, \
+                        clusters_hook=hooks.clusters_hook):
+    cleaned_input = []
+    for traj in point_iterable_list:
+        cleaned_traj = []
+        if len(traj) > 1:
+            prev = traj[0]
+            cleaned_traj.append(traj[0])
+            for pt in traj[1:]:
+                if prev.distance_to(pt) > 0.0:
+                    cleaned_traj.append(pt)
+                    prev = pt           
+        if len(cleaned_traj) > 1:
+            cleaned_input.append(cleaned_traj)
+    
+    return the_whole_enchilada(point_iterable_list=cleaned_input, \
+                        epsilon=epsilon, \
+                        min_neighbors=min_neighbors, \
+                        min_num_trajectories_in_cluster=min_num_trajectories_in_cluster, \
+                        min_vertical_lines=min_vertical_lines, \
+                        min_prev_dist=min_prev_dist, \
+                        partitioned_points_hook=partitioned_points_hook, \
+                        clusters_hook=clusters_hook)
+                        
 def the_whole_enchilada(point_iterable_list, epsilon, min_neighbors, min_num_trajectories_in_cluster, \
                         min_vertical_lines, \
                         min_prev_dist,\
