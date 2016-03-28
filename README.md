@@ -14,7 +14,7 @@ To run the Traclus algorithm, run traclus_impl.main.py, passing it the name of a
 The input file contains a json object with parameters to traclus and the raw trajectories.
 See "traclus_impl.integ_tests.raw_campus_trajectories.txt" for an example input file.
 The output file will contain a json list of representative trajectories.
-Optionally, provide names of files to dump the output from the partitioning and clustering stages to.
+Optionally, provide names of files to dump the output from the partitioning and clustering stages too.
 
 Example: navigate to directory where traclus_impl.main.py is and run "python main.py -i ./raw_traj_input -o ./traclus_output
 
@@ -34,7 +34,7 @@ the partitioning stage and clustering stage. The hook functions for these in mai
 
 ### Running the tests.
 Tests exist under the traclus_impl.tests and traclus_impl.integ_tests.
-To run all of the tests from the commandline, navigate to the package's root and run: python -m unittest discover -p "*_test*.py"
+To run all of the tests from the commandline, navigate to the package's root and run: python -m unittest discover -p "\*_test*.py"
 
 ### Notes on Performance ###
 * Currently, the main bottleneck seems to be the quadratic clustering, and future work includes improving this.
