@@ -1,20 +1,14 @@
 from setuptools import setup
 
-LONG_DESCRIPTION = """First pass implementation of traclus algorithm.
-This works with 2D trajectories. 
-See the github for the unit tests and integ tests.
-
-Note that this is being written as a piece of a senior project.
-The implementation should functionally work, but the distance
-functions need to be sped up and the code should be refactored
-for readability."""
-
+LONG_DESCRIPTION = open('README.md', 'r').read()
 
 setup(name='traclus_impl',
-      version='0.9.4',
+      version='0.9.5',
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',
       author_email='alexpolcyn65@gmail.com',
+      description='Implementation of Traclus for 2-D trajectories', 
+      long_description=LONG_DESCRIPTION,
       license='MIT',
       packages=['traclus_impl', 
       'traclus_impl.tests', 
