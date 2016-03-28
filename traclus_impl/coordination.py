@@ -73,7 +73,8 @@ def get_cluster_iterable_from_all_points_iterable_caller(get_all_traj_segs_from_
         clusters = get_cluster_iterable_from_all_points_iterable(point_iterable_list=point_iterable_list, \
                                                              get_all_traj_segs_from_all_points_caller=get_all_traj_segs_from_all_points_caller, \
                                                              dbscan_caller=dbscan_caller)
-        clusters_hook(clusters)
+        if clusters_hook:
+            clusters_hook(clusters)
         return clusters
     return _func
 
@@ -109,7 +110,8 @@ def get_all_trajectory_line_segments_iterable_from_all_points_iterable_caller(ge
                                                                            trajectory_line_segment_factory=trajectory_line_segment_factory, \
                                                                            trajectory_partitioning_func=trajectory_partitioning_func, \
                                                                            line_seg_from_points_func=line_seg_from_points_func)
-        partitioned_points_hook(traj_line_segs)
+        if partitioned_points_hook:
+            partitioned_points_hook(traj_line_segs)
         return traj_line_segs
     return _func
 

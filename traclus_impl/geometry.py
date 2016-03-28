@@ -32,6 +32,9 @@ class Vec2(object):
     def dot_product_with(self, other_vector):
         return self.x * other_vector.x + self.y * other_vector.y
     
+    def as_dict(self):
+        return {'x': self.x, 'y': self.y}
+    
     def multipled_by_matrix(self, x1, y1, x2, y2):
         new_x = self.x * x1 + self.y * x2
         new_y = self.x * y1 + self.y * y2
@@ -89,6 +92,9 @@ class LineSegment(object):
             unit_x = (end.x - start.x) / self.length
             unit_y = (end.y - start.y) / self.length
             self.unit_vector = Point(unit_x, unit_y)
+            
+    def as_dict(self):
+        return {'start': self.start.as_dict(), 'end': self.end.as_dict()}
         
     def sine_of_angle_with(self, other_line_segment):
         return self.unit_vector.x * other_line_segment.unit_vector.y - \
