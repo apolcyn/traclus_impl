@@ -3,12 +3,11 @@ from setuptools import setup
 LONG_DESCRIPTION = open('README.md', 'r').read()
 
 setup(name='traclus_impl',
-      version='0.9.5',
+      version='0.9.61',
       url='http://github.com/apolcyn/traclus_impl.git',
       author='AP',
       author_email='alexpolcyn65@gmail.com',
       description='Implementation of Traclus for 2-D trajectories', 
-      long_description=LONG_DESCRIPTION,
       license='MIT',
       packages=['traclus_impl', 
       'traclus_impl.tests', 
