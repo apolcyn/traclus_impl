@@ -3,7 +3,7 @@ Created on Jan 19, 2016
 
 @author: Alex
 '''
-from geometry import Point
+from traclus_impl.geometry import Point
 
 def read_test_file(file_name):
     file = open(file_name)

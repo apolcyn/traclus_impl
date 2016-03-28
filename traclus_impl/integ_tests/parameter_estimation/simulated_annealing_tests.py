@@ -4,9 +4,9 @@ Created on Feb 14, 2016
 @author: Alex
 '''
 import unittest
-from parameter_estimation import TraclusSimulatedAnnealingState
-from parameter_estimation import TraclusSimulatedAnnealer
-from geometry import Point
+from traclus_impl.parameter_estimation import TraclusSimulatedAnnealingState
+from traclus_impl.parameter_estimation import TraclusSimulatedAnnealer
+from traclus_impl.geometry import Point
 
 """ These tests might just take a few tries to pass. Simulated Annealing results
 rely on some luck with random numbers, but should usually work. """

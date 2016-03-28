@@ -4,7 +4,7 @@ Created on Jan 14, 2016
 @author: Alex
 '''
 import unittest
-from geometry import Point
+from traclus_impl.geometry import Point
 
 class GetAllTrajectoryLineSegmentsFromAllPointsIntegTest(unittest.TestCase):
 

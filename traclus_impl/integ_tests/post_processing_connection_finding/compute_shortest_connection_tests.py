@@ -4,14 +4,11 @@ Created on Feb 22, 2016
 @author: Alex
 '''
 import unittest
-from geometry import Point
-import processed_trajectory_connecting
-from processed_trajectory_connecting import FilteredTrajectory,\
-    compute_graph_component_ids, find_shortest_connection
-from processed_trajectory_connecting import build_point_graph
-import math
+from traclus_impl.geometry import Point
+from traclus_impl.processed_trajectory_connecting import FilteredTrajectory, \
+    compute_graph_component_ids, find_shortest_connection, \
+     build_point_graph, get_find_other_nearby_neighbors_func
 from traclus_impl.tests.unit_base_tests import UnitBaseTests
-from processed_trajectory_connecting import get_find_other_nearby_neighbors_func
 
 class ComputeShortestConnectionTest(UnitBaseTests):
 

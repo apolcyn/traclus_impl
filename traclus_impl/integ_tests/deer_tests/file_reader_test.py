@@ -4,7 +4,7 @@ Created on Jan 19, 2016
 @author: Alex
 '''
 import unittest
-from geometry import Point
+from traclus_impl.geometry import Point
 from deer_file_reader import read_test_file
 import os
 
@@ -15,7 +15,8 @@ class Test(unittest.TestCase):
                     [Point(2, 4), Point(6, 8)], \
                     [Point(1, 3), Point(5, 7)], \
                     [Point(9, 8)]]
-        res = read_test_file(os.path.dirname(__file__) +  "\\dummy_input.txt")
+        res = read_test_file(os.path.join(os.path.dirname(os.path.realpath(__file__)), 
+                             "dummy_input.txt"))
         exp_iter = iter(expected)
         for traj in res:
             exp_line = exp_iter.next()

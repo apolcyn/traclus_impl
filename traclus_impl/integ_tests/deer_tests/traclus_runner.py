@@ -4,13 +4,13 @@ Created on Jan 20, 2016
 @author: Alex
 '''
 
-from coordination import the_whole_enchilada
+from traclus_impl.coordination import the_whole_enchilada
 from deer_file_reader import read_test_file
 import os
 import cProfile
 
+""" This is useful for profiling performance on the datasets in tehi directory"""
 def run_deer_stuff():
-    print "hello"
     file = os.path.dirname(__file__) + "\\deer_1995.tra"
     points = read_test_file(file)
     traj_res = the_whole_enchilada(point_iterable_list=points, epsilon=40, min_neighbors=7, \

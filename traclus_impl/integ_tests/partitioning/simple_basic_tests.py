@@ -5,8 +5,8 @@ Created on Jan 9, 2016
 '''
 import unittest
 from traclus_impl.tests.unit_base_tests import UnitBaseTests
-from geometry import Point
-from trajectory_partitioning import call_partition_trajectory
+from traclus_impl.geometry import Point
+from traclus_impl.trajectory_partitioning import call_partition_trajectory
 
 class SimpleLinePartitioningIntegTest(UnitBaseTests):
 
