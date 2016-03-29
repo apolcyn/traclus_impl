@@ -10,6 +10,7 @@ from traclus_dbscan import TrajectoryLineSegmentFactory, \
     TrajectoryClusterFactory, TrajectoryLineSegmentCandidateIndex
 from trajectory_partitioning import get_line_segment_from_points, \
     call_partition_trajectory
+from traclus_impl.traclus_dbscan import RtreeTrajectoryLineSegmentCandidateIndex
 
 
 def run_traclus(point_iterable_list, epsilon, min_neighbors, min_num_trajectories_in_cluster, \
@@ -18,7 +19,7 @@ def run_traclus(point_iterable_list, epsilon, min_neighbors, min_num_trajectorie
                         partitioned_points_hook=hooks.partitioned_points_hook, \
                         clusters_hook=hooks.clusters_hook):
     cleaned_input = []
-    for traj in point_iterable_list:
+    for traj in map(lambda l: with_spikes_removed(l), point_iterable_list):
         cleaned_traj = []
         if len(traj) > 1:
             prev = traj[0]
@@ -38,6 +39,21 @@ def run_traclus(point_iterable_list, epsilon, min_neighbors, min_num_trajectorie
                         min_prev_dist=min_prev_dist, \
                         partitioned_points_hook=partitioned_points_hook, \
                         clusters_hook=clusters_hook)
+    
+def with_spikes_removed(trajectory):
+    if len(trajectory) <= 2:
+        return trajectory[:]
+        
+    spikes_removed = []
+    spikes_removed.append(trajectory[0])
+    cur_index = 1
+    while cur_index < len(trajectory) - 1:
+        if trajectory[cur_index - 1].distance_to(trajectory[cur_index + 1]) > 0.0:
+            spikes_removed.append(trajectory[cur_index])
+        cur_index += 1
+        
+    spikes_removed.append(trajectory[cur_index])
+    return spikes_removed
                         
 def the_whole_enchilada(point_iterable_list, epsilon, min_neighbors, min_num_trajectories_in_cluster, \
                         min_vertical_lines, \
@@ -46,7 +62,8 @@ def the_whole_enchilada(point_iterable_list, epsilon, min_neighbors, min_num_tra
                         clusters_hook=hooks.clusters_hook):
     trajectory_line_segment_factory = TrajectoryLineSegmentFactory()
     def _dbscan_caller(cluster_candidates):
-        return dbscan(cluster_candidates_index=TrajectoryLineSegmentCandidateIndex(cluster_candidates), \
+        rtree_index = RtreeTrajectoryLineSegmentCandidateIndex(cluster_candidates, epsilon)
+        return dbscan(cluster_candidates_index=rtree_index, #TrajectoryLineSegmentCandidateIndex(cluster_candidates), \
                       epsilon=epsilon, \
                       min_neighbors=min_neighbors, \
                       cluster_factory=TrajectoryClusterFactory())

@@ -28,6 +28,9 @@ def find_entropy(all_line_segs):
 
 class TraclusSimulatedAnnealingState:
     def __init__(self, input_trajectories, epsilon):
+        if epsilon < 0.0:
+            raise ValueError("can't have a negative epsilon")
+        
         Annealer.copy_strategy = 'method'
         self.input_trajectories = input_trajectories
         self.epsilon = epsilon
@@ -59,8 +62,8 @@ class TraclusSimulatedAnnealer(Annealer):
         Annealer.__init__(self, initial_state=initial_state)
     
     def move(self):
-        new_epsilon = self.state.get_epsilon() + \
-        random.uniform(-self.max_epsilon_step_change, self.max_epsilon_step_change)
+        new_epsilon = max(0.0, self.state.get_epsilon() + \
+        random.uniform(-self.max_epsilon_step_change, self.max_epsilon_step_change))
         self.state = TraclusSimulatedAnnealingState(self.state.input_trajectories, \
                                               new_epsilon)
         

@@ -55,6 +55,9 @@ class Vec2(object):
     def __ne__(self, other):
         return not self.__eq__(other)
     
+    def __str__(self):
+        return "x: " + str(self.x) + ". y: " + str(self.y)
+    
 def distance(diff_x, diff_y):
     return math.sqrt(diff_x * diff_x + diff_y * diff_y)
 
@@ -120,5 +123,8 @@ class LineSegment(object):
             
     def __ne__(self, other):
         return not self.__eq__(other)
+    
+    def __str__(self):
+        return "start: " + str(self.start) + ". end: " + str(self.end)
                 
     

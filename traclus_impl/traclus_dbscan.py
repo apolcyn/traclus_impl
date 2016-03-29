@@ -8,13 +8,21 @@ from generic_dbscan import Cluster, ClusterCandidate, ClusterFactory, ClusterCan
 
 
 class TrajectoryLineSegmentFactory():
+    def __init__(self):
+        self.next_traj_line_seg_id = 0
+        
     def new_trajectory_line_seg(self, line_segment, trajectory_id):
         if line_segment == None or trajectory_id == None or trajectory_id < 0:
             raise Exception("invalid arguments")
-        return TrajectoryLineSegment(line_segment=line_segment, trajectory_id=trajectory_id)
+        next_id = self.next_traj_line_seg_id
+        self.next_traj_line_seg_id += 1
+        return TrajectoryLineSegment(line_segment=line_segment, 
+                                     trajectory_id=trajectory_id, 
+                                     id=next_id)
 
 class TrajectoryLineSegment(ClusterCandidate):
-    def __init__(self, line_segment, trajectory_id, position_in_trajectory=None):
+    def __init__(self, line_segment, trajectory_id, position_in_trajectory=None, 
+                 id=None):
         ClusterCandidate.__init__(self)
         if line_segment == None or trajectory_id < 0:
             raise Exception
@@ -23,6 +31,7 @@ class TrajectoryLineSegment(ClusterCandidate):
         self.trajectory_id = trajectory_id
         self.position_in_trajectory = position_in_trajectory
         self.num_neighbors = -1
+        self.id = id
         
     def get_num_neighbors(self):
         if self.num_neighbors == -1:
@@ -49,6 +58,45 @@ class TrajectoryLineSegmentCandidateIndex(ClusterCandidateIndex):
         neighbors = ClusterCandidateIndex.find_neighbors_of(self, cluster_candidate, epsilon)
         cluster_candidate.set_num_neighbors(len(neighbors))
         return neighbors
+
+class RtreeTrajectoryLineSegmentCandidateIndex(ClusterCandidateIndex):
+    def __init__(self, candidates, epsilon):
+        from rtree import index
+        self.epsilon = epsilon
+        ClusterCandidateIndex.__init__(self, candidates)
+        self.candidates_by_ids = [None] * len(candidates)
+        self.idx = index.Index()
+        for cluster_candidate in candidates:
+            if self.candidates_by_ids[cluster_candidate.id] != None:
+                raise Exception("should have all unique ids")
+            
+            self.candidates_by_ids[cluster_candidate.id] = cluster_candidate
+            line_seg = cluster_candidate.line_segment
+            bounding_box = self.get_bounding_box_of_line_segment(line_seg)
+            self.idx.insert(cluster_candidate.id, bounding_box, cluster_candidate)
+
+    def find_neighbors_of(self, cluster_candidate, epsilon):
+        bounding_box = \
+        self.get_bounding_box_of_line_segment(cluster_candidate.line_segment)
+        possible_neighbor_ids = [n for n in self.idx.intersection(bounding_box)]
+        actual_neighbors = []
+        
+        for id in possible_neighbor_ids:
+            if id == None:
+                raise Exception("ids on these need to be set")
+            if id != cluster_candidate.id and \
+            cluster_candidate.distance_to_candidate(self.candidates_by_ids[id]) <= epsilon:
+                actual_neighbors.append(self.candidates_by_ids[id])
+                
+        cluster_candidate.set_num_neighbors(len(actual_neighbors))
+        return actual_neighbors 
+
+    def get_bounding_box_of_line_segment(self, line_seg):
+        btm = min(line_seg.start.y, line_seg.end.y) - self.epsilon
+        top = max(line_seg.start.y, line_seg.end.y) + self.epsilon
+        left = min(line_seg.start.x, line_seg.end.x) - self.epsilon
+        right = max(line_seg.start.x, line_seg.end.x) + self.epsilon
+        return (left, btm, right, top)
 
 class TrajectoryCluster(Cluster):
     def __init__(self):

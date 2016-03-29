@@ -71,7 +71,9 @@ def get_number_list_reducer_that_returns_each_midway_val(func):
     
 def individual_line_seg_model_cost_computer(line_seg):
     if line_seg.length == 0.0:
-        raise ValueError
+        raise ValueError("line seg has zero length: " + str(line_seg) + \
+                         ". Good chance there's a sequence of points in " + \
+                         " a trajectory of the form [...(x1, y1), (x2, y2), (x1, y1)...]")
     return math.log(line_seg.length, 2)
 
 def get_partition_from_index_creator(line_segment_from_point_getter):
