@@ -32,7 +32,7 @@ The best example of complete usage is the test in "traclus_impl.integ_tests.camp
 ### Parameters
 The parameters to this mostly match up to what's in the paper, but this allows you to be a little more specific.
 
-* epsilon: Same as description in the paper. See 
+* epsilon: Same as description in the paper. 
 * min_neighbors: Minimum number of neighboring line segments for a line segment to be considered a "core line sigment" (as described in the paper).
 See "Definition 5" in the paper.
 * min_num_trajectories_in_cluster: Minimum number of participating trajectories in a cluster after clustering is done in order for the cluster to be kept.
@@ -62,6 +62,9 @@ To run all of the tests from the commandline, navigate to the package's root and
 parameters that you might find when looking at the code.
 
 * The distance function math is in distance_functions.py and geometry.py
+
+* in coordination.py, "run_traclus" first removes points in the trajectories that are too close, and then calls "the_whole_enchilada", which runs traclus.
+Zero-length line segments need to be removed first just to let everything else run smooth.
 
 ### Notes on Performance ###
 * Currently, the main bottleneck seems to be the quadratic clustering, and future work includes improving this.
