@@ -6,10 +6,17 @@ It works for 2-D trajectories.
 
 This was written for a senior project that involved clustering GPS trajectories of pedestrians on a school campus; I found that this worked well for that.
 Other implementations of Traclus exist, but I didn't see one in Python and thought this could be useful for my project and possibly elsewhere.
-This traclus implementation should functionally work, but the clustering phase is currently quadratic and slow on larger sets of trajectories.
+This traclus implementation should functionally work, but it has room to be sped up. Note that if you are able
+to use the rtree python package, then clustering can use an r-tree for neighbor queries instead of quadratic lists.
 
 ### Install
 The easiest way to install is with pip install traclus_impl.
+
+### Installing with rtree
+If you're able to install rtree, then clustering can use an
+Rtree instead of plain list searching. "rtree" is listed as a dependency in the optional-requirements.txt file, 
+but it will not get included by default.
+See https://pypi.python.org/pypi/Rtree/ for installation.
 
 ### Usage
 To run the Traclus algorithm, run traclus_impl.main.py, passing it the name of an input file and output file.
@@ -40,7 +47,7 @@ See "Definition 10" in the paper.
 * min_vertical_lines: Same as the "MinLns" parameter described in the representative trajectory generation algorithm of the paper.
 * min_prev_dist: The smoothing parameter described in the representative trajectory generation algorithm of the paper.
 
-### Intermediate output hooks ###
+### Intermediate output hooks
 The "run_traclus" function in traclus_impl.coordination.py optionally takes hooks for the output of
 the partitioning stage and clustering stage. The hook functions for these in main.py and the 
 "traclus_impl.integ_tests.campus_trajectories_processing_test.py" tests show some example usage.
@@ -55,7 +62,10 @@ In my project, I ran simulated annealing with the clusters_output hook computing
 
 ### Running the tests.
 Tests exist under the traclus_impl.tests and traclus_impl.integ_tests.
-To run all of the tests from the commandline, navigate to the package's root and run: python -m unittest discover -p "\*_test*.py"
+To run all of the tests from the commandline (assuming the package is installed), navigate to the package's root and run: python -m unittest discover -p "\*_test*.py"
+If using bash, run the ./tests.sh to run tests without it needing to be installed (but it's dependencies do).
+Note that a message will appear on stderr telling whether or not rtree is being used. If it's not installed, 
+the rtree tests are skipped.
 
 ### Notes on the code
 * A lot of this was just me messing around with unit testing and manual mocks, which explains a lot of the passing of functions as 
@@ -66,8 +76,7 @@ parameters that you might find when looking at the code.
 * in coordination.py, "run_traclus" first removes points in the trajectories that are too close, and then calls "the_whole_enchilada", which runs traclus.
 Zero-length line segments need to be removed first just to let everything else run smooth.
 
-### Notes on Performance ###
+### Notes on Performance
 * Currently, the main bottleneck seems to be the quadratic clustering, and future work includes improving this.
 For some larger trajectory sets such as the elk file under integ_tests/deer_tests, this implementation will take a very long time.
 * traclus_impl.integ_tests.deer_tests.run_traclus.py is mostly used for profiling this traclus implementation on the trajectories in that folder.
-
