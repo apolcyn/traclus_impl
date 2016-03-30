@@ -7,9 +7,17 @@ import unittest
 from traclus_impl.traclus_dbscan import TrajectoryLineSegment
 from traclus_impl.geometry import LineSegment
 from traclus_impl.traclus_dbscan import RtreeTrajectoryLineSegmentCandidateIndex
-
+from unittest.case import SkipTest
 
 class RtreeClusterCandidateIndexTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super(RtreeClusterCandidateIndexTest, cls).setUpClass()
+        try:
+            import rtree
+        except ImportError:
+            raise SkipTest("rtree not importable, skipping tests, " \
+                           "can't use the class under test")
 
     class MockDistanceCandidate(TrajectoryLineSegment):
         def __init__(self, distances, line_segment, id):
@@ -21,7 +29,7 @@ class RtreeClusterCandidateIndexTest(unittest.TestCase):
             
         def distance_to_candidate(self, other_candidate):
             return self.distances[other_candidate.id]
-        
+                        
     def test_only_looks_at_segments_that_intersect_with_candidates_bounding_box(self):
         distances = [0.0, 0.0, 0.0, 0.0]
         epsilon = 1.0
@@ -44,7 +52,7 @@ class RtreeClusterCandidateIndexTest(unittest.TestCase):
                     
         i = 0
         for cand in candidates:
-            actual_neighbors = index.find_neighbors_of(cand, epsilon=epsilon)
+            actual_neighbors = index.find_neighbors_of(cand)
             self.assertEquals(len(expected_neighbors[i]), len(actual_neighbors), 
                               "length test failed on index :" + str(i))
             for neighbor in actual_neighbors:

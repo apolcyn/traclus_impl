@@ -7,11 +7,9 @@ from generic_dbscan import dbscan
 import hooks
 from line_segment_averaging import get_representative_line_from_trajectory_line_segments
 from traclus_dbscan import TrajectoryLineSegmentFactory, \
-    TrajectoryClusterFactory, TrajectoryLineSegmentCandidateIndex
+    TrajectoryClusterFactory, BestAvailableClusterCandidateIndex
 from trajectory_partitioning import get_line_segment_from_points, \
     call_partition_trajectory
-from traclus_impl.traclus_dbscan import RtreeTrajectoryLineSegmentCandidateIndex
-
 
 def run_traclus(point_iterable_list, epsilon, min_neighbors, min_num_trajectories_in_cluster, \
                         min_vertical_lines, \
@@ -62,9 +60,8 @@ def the_whole_enchilada(point_iterable_list, epsilon, min_neighbors, min_num_tra
                         clusters_hook=hooks.clusters_hook):
     trajectory_line_segment_factory = TrajectoryLineSegmentFactory()
     def _dbscan_caller(cluster_candidates):
-        rtree_index = RtreeTrajectoryLineSegmentCandidateIndex(cluster_candidates, epsilon)
-        return dbscan(cluster_candidates_index=rtree_index, #TrajectoryLineSegmentCandidateIndex(cluster_candidates), \
-                      epsilon=epsilon, \
+        line_seg_index = BestAvailableClusterCandidateIndex(cluster_candidates, epsilon)
+        return dbscan(cluster_candidates_index=line_seg_index, #TrajectoryLineSegmentCandidateIndex(cluster_candidates), \
                       min_neighbors=min_neighbors, \
                       cluster_factory=TrajectoryClusterFactory())
         

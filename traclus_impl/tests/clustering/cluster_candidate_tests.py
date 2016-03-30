@@ -21,9 +21,9 @@ class Test(unittest.TestCase):
             return 0
        
         candidate = ClusterCandidate()
-        index = ClusterCandidateIndex([1, 2, 3, 4, 5])
+        index = ClusterCandidateIndex([1, 2, 3, 4, 5], epsilon=0)
         candidate.distance_to_candidate = mock_dist_to_other_candidate_func
-        index.find_neighbors_of(cluster_candidate=candidate, epsilon=0)
+        index.find_neighbors_of(cluster_candidate=candidate)
         self.assertEquals(counter.get_val(), 5)        
 
 

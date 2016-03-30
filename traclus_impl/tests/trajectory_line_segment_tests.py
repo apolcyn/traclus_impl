@@ -26,24 +26,24 @@ class TestTrajectoryLineSegments(unit_base_tests.UnitBaseTests):
         line_segment = TrajectoryLineSegment(self.create_simple_line_seg((0, 0), (1, 1)), 1)
         line_segment.distance_to_candidate = lambda x: 0.0
         mock_canididates = [1, 2, 3, 4, 5, 6]
-        index = TrajectoryLineSegmentCandidateIndex(mock_canididates)
+        index = TrajectoryLineSegmentCandidateIndex(mock_canididates, epsilon=0.1)
 
         self.assertRaises(Exception, line_segment.get_num_neighbors)
-        index.find_neighbors_of(line_segment, epsilon=0.1)
+        index.find_neighbors_of(line_segment)
         self.assertEquals(line_segment.get_num_neighbors(), 6)
         
     def test_num_neighbor_counting_raises_if_num_neighbors_change(self):
         line_segment = TrajectoryLineSegment(self.create_simple_line_seg((0, 0), (1, 1)), 1)
         line_segment.distance_to_candidate = lambda x: 0.0
         mock_canididates = [1, 2, 3, 4, 5, 6]
-        index = TrajectoryLineSegmentCandidateIndex(mock_canididates)
+        index = TrajectoryLineSegmentCandidateIndex(mock_canididates, epsilon=0.1)
         
         self.assertRaises(Exception, line_segment.get_num_neighbors)
-        index.find_neighbors_of(line_segment, epsilon=0.1)
+        index.find_neighbors_of(line_segment)
         self.assertEquals(line_segment.get_num_neighbors(), 6)
         mock_canididates.append(7)
         self.assertRaises(Exception, index.find_neighbors_of, \
-                          candidates=mock_canididates, epsilon=0)
+                          candidates=mock_canididates)
         
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.test_creation']

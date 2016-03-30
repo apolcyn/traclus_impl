@@ -6,7 +6,6 @@ Created on Dec 31, 2015
 from distance_functions import perpendicular_distance, angular_distance, parrallel_distance
 from generic_dbscan import Cluster, ClusterCandidate, ClusterFactory, ClusterCandidateIndex
 
-
 class TrajectoryLineSegmentFactory():
     def __init__(self):
         self.next_traj_line_seg_id = 0
@@ -51,19 +50,17 @@ class TrajectoryLineSegment(ClusterCandidate):
             parrallel_distance(self.line_segment, other_candidate.line_segment)
             
 class TrajectoryLineSegmentCandidateIndex(ClusterCandidateIndex):
-    def __init__(self, candidates):
-        ClusterCandidateIndex.__init__(self, candidates)
+    def __init__(self, candidates, epsilon):
+        ClusterCandidateIndex.__init__(self, candidates, epsilon)
         
-    def find_neighbors_of(self, cluster_candidate, epsilon):
-        neighbors = ClusterCandidateIndex.find_neighbors_of(self, cluster_candidate, epsilon)
+    def find_neighbors_of(self, cluster_candidate):
+        neighbors = ClusterCandidateIndex.find_neighbors_of(self, cluster_candidate)
         cluster_candidate.set_num_neighbors(len(neighbors))
         return neighbors
 
 class RtreeTrajectoryLineSegmentCandidateIndex(ClusterCandidateIndex):
     def __init__(self, candidates, epsilon):
-        from rtree import index
-        self.epsilon = epsilon
-        ClusterCandidateIndex.__init__(self, candidates)
+        ClusterCandidateIndex.__init__(self, candidates, epsilon)
         self.candidates_by_ids = [None] * len(candidates)
         self.idx = index.Index()
         for cluster_candidate in candidates:
@@ -75,7 +72,7 @@ class RtreeTrajectoryLineSegmentCandidateIndex(ClusterCandidateIndex):
             bounding_box = self.get_bounding_box_of_line_segment(line_seg)
             self.idx.insert(cluster_candidate.id, bounding_box, cluster_candidate)
 
-    def find_neighbors_of(self, cluster_candidate, epsilon):
+    def find_neighbors_of(self, cluster_candidate):
         bounding_box = \
         self.get_bounding_box_of_line_segment(cluster_candidate.line_segment)
         possible_neighbor_ids = [n for n in self.idx.intersection(bounding_box)]
@@ -85,7 +82,8 @@ class RtreeTrajectoryLineSegmentCandidateIndex(ClusterCandidateIndex):
             if id == None:
                 raise Exception("ids on these need to be set")
             if id != cluster_candidate.id and \
-            cluster_candidate.distance_to_candidate(self.candidates_by_ids[id]) <= epsilon:
+            cluster_candidate.distance_to_candidate(self.candidates_by_ids[id]) <= \
+            self.epsilon:
                 actual_neighbors.append(self.candidates_by_ids[id])
                 
         cluster_candidate.set_num_neighbors(len(actual_neighbors))
@@ -119,5 +117,19 @@ class TrajectoryCluster(Cluster):
 class TrajectoryClusterFactory(ClusterFactory):
     def new_cluster(self):
         return TrajectoryCluster()
+
+# Use an r tree index for line segments during dbscan if it's available, 
+# otherwise use the pure python n squared dbscan.
+BestAvailableClusterCandidateIndex = None
+import sys, os
+try:
+    from rtree import index
+    BestAvailableClusterCandidateIndex = RtreeTrajectoryLineSegmentCandidateIndex
+    sys.stderr.write(str(os.path.realpath(__file__)) + ": rtree import succeeded." + \
+                     " Using an r-tree for clustering")
+except ImportError:
+    BestAvailableClusterCandidateIndex = TrajectoryLineSegmentCandidateIndex
+    sys.stderr.write(str(os.path.realpath(__file__)) + ": rtree import failed." + \
+                     " Using plain python quadratic clustering")
     
     

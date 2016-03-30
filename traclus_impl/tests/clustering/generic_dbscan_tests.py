@@ -28,9 +28,9 @@ class DbScanTest(unittest.TestCase):
             else:
                 expected_noise.append(test_points[i])
 
-        return {'test_index': ClusterCandidateIndex(test_points), 'expected_clusters': \
+        return {'test_index': ClusterCandidateIndex(test_points, epsilon), 'expected_clusters': \
                 expected_clusters, 'expected_noise': expected_noise, \
-                'epsilon': epsilon, 'min_neighbors': min_neighbors}
+                'min_neighbors': min_neighbors}
 
     def setUp(self):
         self.test_cases = []
@@ -100,7 +100,7 @@ class DbScanTest(unittest.TestCase):
     def test_dbscan(self):
         cluster_factory = ClusterFactory()
         for test_ob in self.test_cases:
-            clusters = dbscan(test_ob['test_index'], test_ob['epsilon'], \
+            clusters = dbscan(test_ob['test_index'], \
                    test_ob['min_neighbors'], cluster_factory)
             for expected in test_ob['expected_clusters']:
                 self.assertTrue(self.find_single_matching_cluster(expected, clusters), \
