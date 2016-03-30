@@ -3,7 +3,7 @@ from setuptools import setup
 LONG_DESCRIPTION = open('README.md', 'r').read()
 
 setup(name='traclus_impl',
-      version='0.9.7',
+      version='0.9.8',
       url='http://github.com/apolcyn/traclus_impl.git',
       author='Alex Polcyn',
       author_email='alexpolcyn65@gmail.com',
