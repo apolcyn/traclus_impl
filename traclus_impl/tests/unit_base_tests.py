@@ -38,7 +38,11 @@ class UnitBaseTests(unittest.TestCase):
         for item in iterable_ob:
             count += 1
         
-        self.assertEqual(count, len(list_ob))
+        self.assertEqual(count, len(list_ob), 
+                         "Lengths differ. Iterable length: " + str(count) + \
+                         ". List length: " + str(len(list_ob)) + \
+                         ". Iterable: " + str(iterable_ob) + \
+                         ". List: " + str(list_ob))
         if count > 0:
             i = 0
             for item in iterable_ob:
