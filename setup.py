@@ -3,7 +3,7 @@ from setuptools import setup
 LONG_DESCRIPTION = open('README.md', 'r').read()
 
 setup(name='traclus_impl',
-      version='0.9.7',
+      version='0.9.9',
       url='http://github.com/apolcyn/traclus_impl.git',
       author='Alex Polcyn',
       author_email='alexpolcyn65@gmail.com',
@@ -22,7 +22,8 @@ setup(name='traclus_impl',
       'traclus_impl.integ_tests.deer_tests',
       'traclus_impl.integ_tests.coordination'],
       package_data={'traclus_impl.integ_tests': ['*.txt'], 
-	      'traclus_impl.integ_tests.deer_tests': ['*.tra', '*.txt']},
+	      'traclus_impl.integ_tests.deer_tests': ['*.tra', '*.txt'], 
+              'traclus_impl.integ_tests.partitioning': ['*.txt']},
       install_requires=[
 	  'simanneal',
 	  'click',

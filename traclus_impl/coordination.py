@@ -9,7 +9,7 @@ from line_segment_averaging import get_representative_line_from_trajectory_line_
 from traclus_dbscan import TrajectoryLineSegmentFactory, \
     TrajectoryClusterFactory, BestAvailableClusterCandidateIndex
 from trajectory_partitioning import get_line_segment_from_points, \
-    call_partition_trajectory, NEW_partition_trajectory_caller
+    call_partition_trajectory
 
 def run_traclus(point_iterable_list, epsilon, min_neighbors, min_num_trajectories_in_cluster, \
                         min_vertical_lines, \
@@ -68,7 +68,7 @@ def the_whole_enchilada(point_iterable_list, epsilon, min_neighbors, min_num_tra
     all_traj_segs_iter_from_all_points_caller = \
     get_all_trajectory_line_segments_iterable_from_all_points_iterable_caller(get_line_segs_from_points_func=get_trajectory_line_segments_from_points_iterable, \
                                                                               trajectory_line_segment_factory=trajectory_line_segment_factory, \
-                                                                              trajectory_partitioning_func=NEW_partition_trajectory_caller, \
+                                                                              trajectory_partitioning_func=call_partition_trajectory, \
                                                                               line_seg_from_points_func=get_line_segment_from_points, \
                                                                               partitioned_points_hook=partitioned_points_hook)
     cluster_iter_from_points_caller = \
