@@ -95,6 +95,8 @@ class LineSegment(object):
             unit_x = (end.x - start.x) / self.length
             unit_y = (end.y - start.y) / self.length
             self.unit_vector = Point(unit_x, unit_y)
+        else:
+            self.unit_vector = Point(10000000000, 10000000000)
             
     def as_dict(self):
         return {'start': self.start.as_dict(), 'end': self.end.as_dict()}
